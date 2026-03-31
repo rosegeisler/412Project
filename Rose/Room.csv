@@ -1,0 +1,101 @@
+RoomID,BedCount,RoomType,RoomNumber,PetFriendly,Accessible,SmokeFree,BuildingID
+3816,1,Standard,100,False,False,True,501
+3945,1,Suite,101,True,False,False,501
+1778,1,Delux,102,True,False,True,501
+3461,1,Standard,103,False,False,True,501
+2181,2,Standard,104,True,True,False,501
+3311,1,Delux,105,True,True,False,501
+3619,1,Junier Suite,106,True,True,False,501
+3312,1,Delux,107,True,False,True,501
+4417,2,Junier Suite,108,True,False,False,501
+4228,1,Delux,109,False,True,False,501
+4933,2,Standard,110,True,True,True,501
+2519,1,Suite,111,True,True,True,501
+3836,2,Suite,112,False,False,False,501
+3248,2,Suite,113,True,True,False,501
+2189,1,Standard,114,True,False,False,501
+2213,1,Junier Suite,115,False,True,True,501
+2147,2,Junier Suite,116,False,False,True,501
+1379,2,Suite,117,False,False,True,501
+2858,2,Standard,118,True,False,False,501
+1699,1,Junier Suite,119,False,True,False,501
+3862,2,Suite,120,False,False,True,501
+4469,2,Junier Suite,121,True,False,False,501
+2111,2,Delux,122,False,False,True,501
+1335,2,Junier Suite,123,False,False,False,501
+3280,1,Delux,124,True,True,False,501
+4686,1,Standard,125,True,False,True,501
+1692,1,Standard,126,True,True,True,501
+1068,1,Delux,127,False,False,False,501
+1934,1,Suite,128,False,False,False,501
+4455,2,Delux,129,True,True,False,501
+3005,2,Suite,130,False,True,False,501
+2884,1,Suite,131,True,False,False,501
+3973,1,Delux,132,True,True,True,501
+3113,2,Suite,133,True,True,False,501
+4931,2,Suite,134,False,False,True,501
+4012,1,Junier Suite,135,False,True,True,501
+2860,2,Suite,136,False,False,False,501
+4375,2,Junier Suite,137,True,False,True,501
+4033,2,Standard,138,False,False,True,501
+1977,1,Junier Suite,139,False,True,False,501
+2369,1,Junier Suite,140,False,True,True,501
+4255,2,Suite,141,True,False,True,501
+1631,1,Delux,142,False,False,False,501
+2910,2,Delux,143,True,False,True,501
+1109,2,Standard,144,True,False,True,501
+4593,2,Suite,145,True,False,False,501
+2852,1,Standard,146,False,True,True,501
+2502,2,Delux,147,False,False,False,501
+1481,2,Standard,148,True,True,True,501
+3394,1,Standard,149,False,False,True,501
+2328,1,Delux,150,True,True,False,501
+2044,1,Delux,151,False,False,True,501
+4424,1,Delux,152,False,True,False,501
+1860,2,Delux,153,False,False,True,501
+3722,1,Standard,154,False,False,True,501
+1308,2,Standard,155,True,False,False,501
+1971,2,Suite,156,False,False,True,501
+4374,1,Standard,157,False,False,False,501
+3887,2,Delux,158,True,True,True,501
+4932,2,Suite,159,False,True,False,501
+1411,1,Suite,160,True,True,False,501
+2325,1,Delux,161,True,False,False,501
+2082,2,Standard,162,True,False,True,501
+1134,1,Suite,163,True,False,True,501
+1057,1,Standard,164,False,True,True,501
+4565,2,Delux,165,False,True,True,501
+2310,2,Standard,166,True,True,False,501
+1620,2,Junier Suite,167,False,True,True,501
+1466,1,Junier Suite,168,True,True,True,501
+2620,1,Junier Suite,169,True,False,True,501
+1660,2,Suite,170,False,False,False,501
+1919,2,Delux,171,True,False,False,501
+2947,1,Suite,172,False,True,True,501
+3854,1,Delux,173,True,True,False,501
+4057,1,Junier Suite,174,True,True,True,501
+1140,1,Standard,175,True,True,True,501
+2096,1,Standard,176,True,True,True,501
+4639,2,Delux,177,False,True,True,501
+4642,2,Standard,178,True,True,False,501
+2115,2,Suite,179,True,False,True,501
+3938,1,Standard,180,False,False,False,501
+1940,2,Standard,181,True,False,False,501
+4562,1,Suite,182,True,True,False,501
+1612,2,Delux,183,False,True,True,501
+4574,1,Standard,184,True,False,True,501
+4520,1,Suite,185,False,False,True,501
+2456,2,Junier Suite,186,False,True,False,501
+1748,1,Delux,187,False,False,False,501
+4689,1,Suite,188,True,False,True,501
+1992,1,Delux,189,False,True,False,501
+1891,1,Delux,190,True,True,False,501
+4118,1,Suite,191,True,False,False,501
+3561,1,Delux,192,False,True,True,501
+1534,2,Delux,193,True,True,False,501
+3515,2,Junier Suite,194,True,False,True,501
+4738,2,Junier Suite,195,True,False,False,501
+1182,1,Standard,196,True,True,False,501
+4779,2,Junier Suite,197,False,True,False,501
+3713,2,Suite,198,True,True,True,501
+1647,1,Suite,199,True,True,False,501
