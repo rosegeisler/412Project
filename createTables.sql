@@ -19,3 +19,11 @@ CREATE Table Room (
 	SmokeFree BOOL NOT NULL,
     BuildingID INT references Location(BuildingID) NOT NULL
 );
+
+CREATE Table Guest (
+	GuestID INT PRIMARY KEY,
+	LoyaltyMember BOOLEAN NOT NULL DEFAULT FALSE,
+	GuestName TEXT NOT NULL,
+	PhoneNumber BIGINT NOT NULL UNIQUE,
+	Age SMALLINT CHECK (Age >= 0)	-- Maybe we can make it so only 18+ can get a room
+);
