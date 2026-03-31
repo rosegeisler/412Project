@@ -1,0 +1,1 @@
+\copy Guest FROM 'Guests.csv' WITH (FORMAT CSV, HEADER);
