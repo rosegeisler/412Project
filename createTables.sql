@@ -25,5 +25,5 @@ CREATE Table Guest (
 	LoyaltyMember BOOLEAN NOT NULL DEFAULT FALSE,
 	GuestName TEXT NOT NULL,
 	PhoneNumber BIGINT NOT NULL UNIQUE,
-	Age SMALLINT CHECK (Age >= 0)	-- Maybe we can make it so only 18+ can get a room
+	Age SMALLINT CHECK (Age >= 18)	-- We can make it so only 18+ can get a room
 );
