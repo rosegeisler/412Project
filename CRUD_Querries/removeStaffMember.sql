@@ -1,1 +1,1 @@
-DELETE FROM Staff WHERE StaffID = 24124;
+DELETE FROM Staff WHERE StaffID = 3;
