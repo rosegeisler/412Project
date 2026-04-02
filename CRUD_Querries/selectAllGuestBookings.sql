@@ -1,0 +1,3 @@
+SELECT * FROM Booking
+WHERE GuestID = 1111
+ORDER BY StartDate ASC; 
