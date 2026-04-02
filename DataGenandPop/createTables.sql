@@ -46,4 +46,29 @@ CREATE TABLE Booking (
 );
 
 
+CREATE TABLE Staff (
+    staffid       INTEGER PRIMARY KEY,
+    name          VARCHAR(100) NOT NULL,
+    phonenumber   VARCHAR(15) NOT NULL,
+    buildingid    INTEGER NOT NULL REFERENCES Location(buildingid)
+);
+
+CREATE TABLE Housekeeper (
+    staffid       INTEGER PRIMARY KEY REFERENCES Staff(staffid) ON DELETE CASCADE,
+    availability  DATE[] DEFAULT '{}'
+);
+
+CREATE TABLE HousekeeperBooking (
+    staffid       INTEGER NOT NULL REFERENCES Housekeeper(staffid) ON DELETE CASCADE,
+    bookingid     INTEGER NOT NULL REFERENCES Booking(bookingid) ON DELETE CASCADE,
+    PRIMARY KEY (staffid, bookingid)
+);
+
+CREATE TABLE FrontWorker (
+    staffid       INTEGER PRIMARY KEY REFERENCES Staff(staffid) ON DELETE CASCADE,
+    username      VARCHAR(50) UNIQUE NOT NULL,
+    password      VARCHAR(255) NOT NULL
+);
+
+
 
