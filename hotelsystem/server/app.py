@@ -1,8 +1,17 @@
 from flask import Flask
-from flask_cors import CORS
+import psycopg2
 
 app = Flask(__name__)
-CORS(app)
+
+conn = psycopg2.connect(
+    dbname="dbname",
+    user="ur_user",
+    password="ur_pw",
+    host="localhost",
+    port="5432"
+)
+cur = conn.cursor()
+
 
 @app.route("/")
 def home():
@@ -10,3 +19,7 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+conn.commit()
+cur.close()
+conn.close()
