@@ -9,7 +9,7 @@ CREATE Table Guest (
 	GuestID INT PRIMARY KEY, 
 	GuestName TEXT NOT NULL,
 	PhoneNumber BIGINT NOT NULL UNIQUE,
-	Age SMALLINT CHECK (Age >= 18),	-- We can make it so only 18+ can get a room
+	Age SMALLINT CHECK (Age >= 18),
 	LoyaltyMember BOOLEAN NOT NULL DEFAULT FALSE
 );
 
@@ -23,8 +23,9 @@ CREATE TABLE Location (
 
 CREATE Table Room (
 	RoomID INT PRIMARY KEY,
-	BedCount SMALLINT NOT NULL,
-	RoomType TEXT,
+	Price SMALLINT NOT NULL check(Price > 0),
+	BedCount SMALLINT NOT NULL check(BedCount > 0),
+	RoomType TEXT NOT NULL,
 	RoomNumber TEXT NOT NULL,
 	PetFriendly BOOL NOT NULL,
 	Accessible BOOL NOT NULL,
@@ -42,6 +43,7 @@ CREATE TABLE Booking (
 	CheckedOut BOOLEAN NOT NULL,
 	Ready BOOLEAN NOT NULL,
 	Status STATUS NOT NULL DEFAULT 'Reserved'
+
 
 );
 

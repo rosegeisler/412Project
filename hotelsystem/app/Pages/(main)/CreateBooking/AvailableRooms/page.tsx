@@ -20,6 +20,15 @@ export default function Home() {
                         <option value="1">1</option>
                         <option value="2">2</option>
                     </select>
+
+                    <label>Room Type:</label>
+                    <select>
+                        <option value="Standard">Standard</option>
+                        <option value="Delux">Delux</option>
+                        <option value="Junior Suite">Junior Suite</option>
+                        <option value="Suite">Suite</option>
+                    </select>
+
                     <input type="checkbox" value="no"/>
                     <label>Pet Friendly:</label>
 
