@@ -1,6 +1,9 @@
+cd hotelsystem
+
 npm build run
 
 npm run dev
+
 
 relevant files in > app > Components
 app > Pages 
