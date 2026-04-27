@@ -36,8 +36,8 @@ CREATE Table Room (
 CREATE TABLE Booking (
 	BookingID INT PRIMARY KEY,
 	RoomID INT NOT NULL REFERENCES Room (RoomID),
-	StartDate DATE NOT NULL, --karen: did not implement the database itself to check for date overlap, just in the data generation python script for now
-	EndDate DATE NOT NULL,
+	StartDate DATE NOT NULL CHECK (StartDate >= CURRENT_DATE), 
+	EndDate DATE NOT NULL CHECK (EndDate >= StartDate),
 	GuestID INT NOT NULL REFERENCES Guest (GuestID),
 	CheckedIn BOOLEAN NOT NULL,
 	CheckedOut BOOLEAN NOT NULL,
