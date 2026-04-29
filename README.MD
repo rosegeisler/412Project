@@ -1,6 +1,7 @@
 --To Set up the Database--
 
 -Go to file setup.sh and fill in postegre credentials
+-Go to BookingGeneration.py and fill in postgre credentials
 
  cd DataGenandPop 
 
@@ -21,7 +22,11 @@ pip install requirements.txt or equivalent
 
 
 
+
+
 cd hotelsystem
+
+-Go to ->server-> app.py and fill in postrge credentials
 
 npm build run
 
