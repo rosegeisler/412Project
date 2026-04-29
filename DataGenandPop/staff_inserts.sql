@@ -29,35 +29,35 @@ INSERT INTO Staff (staffid, name, phonenumber, buildingid) VALUES (27, 'Yuki Wil
 INSERT INTO Staff (staffid, name, phonenumber, buildingid) VALUES (28, 'Marcus Lee', '480-487-2291', 501);
 
 -- Housekeeper inserts
-INSERT INTO Housekeeper (staffid, availability) VALUES (1, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (2, ARRAY['2026-04-02','2026-04-03','2026-04-06']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (3, ARRAY['2026-04-01','2026-04-02','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (4, ARRAY['2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (5, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-06']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (6, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (7, ARRAY['2026-04-01','2026-04-02','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (8, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (9, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (10, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (11, ARRAY['2026-04-01','2026-04-02','2026-04-04','2026-04-05']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (12, ARRAY['2026-04-01','2026-04-02','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (13, ARRAY['2026-04-01','2026-04-04','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (14, ARRAY['2026-04-01','2026-04-03','2026-04-04','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (15, ARRAY['2026-04-03','2026-04-05','2026-04-06']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (16, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (17, ARRAY['2026-04-03','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (18, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (19, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-05']::DATE[]);
-INSERT INTO Housekeeper (staffid, availability) VALUES (20, ARRAY['2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-06','2026-04-07']::DATE[]);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (1, False, False, True, True, True, True, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (2, True, True, True, False, False, False, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (3, True, False, False, True, False, True, True);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (4, True, True, False, False, False, True, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (5, True, True, True, False, False, False, True);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (6, True, False, True, False, False, False, True);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (7, False, True, True, False, False, False, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (8, True, True, False, True, True, True, True);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (9, True, False, True, False, False, False, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (10, True, True, False, False, True, False, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (11, True, False, True, False, True, True, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (12, True, True, False, True, True, False, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (13, True, True, False, False, True, True, True);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (14, True, True, False, True, True, True, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (15, True, False, False, True, True, False, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (16, False, False, False, True, True, True, True);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (17, False, True, True, True, True, True, True);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (18, True, True, True, False, True, True, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (19, False, True, True, False, True, False, False);
+INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) VALUES (20, True, True, True, False, False, False, False);
 
 -- FrontWorker inserts
-INSERT INTO FrontWorker (staffid, username, password) VALUES (21, 'hlewis', '$2b$12$d26fEeVVhDIq2AnHTmt9OB');
-INSERT INTO FrontWorker (staffid, username, password) VALUES (22, 'twhite', '$2b$12$GhnuKoneNo41eoPni6JDWY');
-INSERT INTO FrontWorker (staffid, username, password) VALUES (23, 'zhall', '$2b$12$lgAACTP9gyv1plBArp5B1I');
-INSERT INTO FrontWorker (staffid, username, password) VALUES (24, 'oyoung', '$2b$12$d9Z850kEnydx9qWCA79ISj');
-INSERT INTO FrontWorker (staffid, username, password) VALUES (25, 'staylor', '$2b$12$s8JHUdKF0j7elKPoh3pKMz');
-INSERT INTO FrontWorker (staffid, username, password) VALUES (26, 'dhernandez', '$2b$12$KG5mSoyPstUeC99enq522w');
-INSERT INTO FrontWorker (staffid, username, password) VALUES (27, 'ywilliams', '$2b$12$jZRL9OaYsP6ihgIqLSmNqE');
-INSERT INTO FrontWorker (staffid, username, password) VALUES (28, 'mlee', '$2b$12$40fAraVNqTIAae24HZKjht');
+INSERT INTO FrontWorker (staffid, username, password) VALUES (21, 'hlewis', '$2b$12$CTP9gyv1plBArp5B1Id9Z8');
+INSERT INTO FrontWorker (staffid, username, password) VALUES (22, 'twhite', '$2b$12$50kEnydx9qWCA79ISjs8JH');
+INSERT INTO FrontWorker (staffid, username, password) VALUES (23, 'zhall', '$2b$12$UdKF0j7elKPoh3pKMzKG5m');
+INSERT INTO FrontWorker (staffid, username, password) VALUES (24, 'oyoung', '$2b$12$SoyPstUeC99enq522wjZRL');
+INSERT INTO FrontWorker (staffid, username, password) VALUES (25, 'staylor', '$2b$12$9OaYsP6ihgIqLSmNqE40fA');
+INSERT INTO FrontWorker (staffid, username, password) VALUES (26, 'dhernandez', '$2b$12$raVNqTIAae24HZKjht3X13');
+INSERT INTO FrontWorker (staffid, username, password) VALUES (27, 'ywilliams', '$2b$12$npgW2zMj518Y2bTu5X1YqW');
+INSERT INTO FrontWorker (staffid, username, password) VALUES (28, 'mlee', '$2b$12$g21nYCsXoblu17rNy8H6h8');
 
 -- Total: 28 staff (20 housekeepers, 8 front workers)

@@ -3,9 +3,9 @@ import random
 from datetime import datetime, timedelta
 
 conn = psycopg2.connect(
-    dbname="412_proj",
-    user="ur_user",
-    password="ur_pw",
+    dbname="myhotel",
+    user="uruser",
+    password="ur pw",
     host="localhost",
     port="5432"
 )
@@ -49,6 +49,22 @@ for i in range(80):
         startDate = random_date(start_range, end_range)
         endDate = startDate + timedelta(days=random.randint(1, 14))
 
+        cur.execute("""
+            SELECT Price FROM Room WHERE RoomID = %s;
+         """, (roomID,))
+
+        result = cur.fetchone()
+        if result is None:
+            print("Room not found!")
+        else:
+            roomCost = result[0]
+
+
+        numDays = (endDate - startDate).days
+        price = numDays * roomCost
+
+
+
         # make sure the same room doesnt overlap w another booking for same date
         conflict = False
         for (s, e) in room_bookings[roomID]:
@@ -88,15 +104,16 @@ for i in range(80):
             #insert
             cur.execute("""
                 INSERT INTO Booking (
-                    BookingID, RoomID, StartDate, EndDate,
+                    BookingID, RoomID, StartDate, EndDate, BookingPrice,
                     GuestID, CheckedIn, CheckedOut, Ready, Status
                 )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
             """, (
                 bookingID,
                 roomID,
                 startDate.strftime("%Y-%m-%d"),
                 endDate.strftime("%Y-%m-%d"),
+                price,
                 guestID,
                 checkedIn,
                 checkedOut,

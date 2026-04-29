@@ -1,0 +1,101 @@
+RoomID,Price,BedCount,RoomType,RoomNumber,PetFriendly,Accessible,SmokeFree,BuildingID
+0,86,1,Standard,100,True,True,False,501
+1,105.8,2,Delux,101,False,True,False,501
+2,100.0,2,Junier Suite,102,True,False,True,501
+3,90,1,Standard,103,False,False,True,501
+4,77,2,Standard,104,False,False,False,501
+5,92,2,Standard,105,True,False,True,501
+6,132.3,2,Suite,106,False,True,False,501
+7,128.25,2,Suite,107,False,True,False,501
+8,102.5,2,Junier Suite,108,True,False,True,501
+9,97,2,Standard,109,True,True,False,501
+10,77,2,Standard,110,True,False,True,501
+11,95,1,Standard,111,False,False,False,501
+12,96.6,2,Delux,112,True,True,False,501
+13,106.25,1,Junier Suite,113,False,True,False,501
+14,111.25,1,Junier Suite,114,True,False,True,501
+15,88.55,2,Delux,115,False,False,False,501
+16,94.3,2,Delux,116,True,False,True,501
+17,100.05,1,Delux,117,True,False,False,501
+18,102.35,1,Delux,118,False,False,False,501
+19,101.25,2,Junier Suite,119,True,True,True,501
+20,117.5,1,Junier Suite,120,True,False,False,501
+21,133.65,2,Suite,121,False,True,True,501
+22,110.39999999999999,2,Delux,122,True,False,False,501
+23,97.5,1,Junier Suite,123,True,False,True,501
+24,103.95,1,Suite,124,True,False,True,501
+25,92.0,2,Delux,125,True,False,True,501
+26,95.44999999999999,1,Delux,126,False,False,False,501
+27,97,2,Standard,127,True,True,False,501
+28,118.80000000000001,2,Suite,128,True,True,False,501
+29,114.99999999999999,1,Delux,129,True,False,True,501
+30,87.39999999999999,2,Delux,130,False,True,False,501
+31,121.25,2,Junier Suite,131,False,True,True,501
+32,112.69999999999999,1,Delux,132,False,True,False,501
+33,104.64999999999999,2,Delux,133,False,False,True,501
+34,103.49999999999999,1,Delux,134,False,False,False,501
+35,112.5,1,Junier Suite,135,False,True,True,501
+36,96,2,Standard,136,False,False,False,501
+37,116.10000000000001,2,Suite,137,False,True,False,501
+38,86.25,1,Delux,138,True,False,False,501
+39,96.6,1,Delux,139,True,True,False,501
+40,85,2,Standard,140,True,True,False,501
+41,108.0,1,Suite,141,True,False,False,501
+42,103.75,2,Junier Suite,142,True,False,False,501
+43,100.0,1,Junier Suite,143,True,True,False,501
+44,98,2,Standard,144,False,True,False,501
+45,124.2,2,Suite,145,False,True,True,501
+46,93,1,Standard,146,True,False,False,501
+47,130.95000000000002,2,Suite,147,False,True,True,501
+48,96.6,2,Delux,148,True,False,False,501
+49,112.5,1,Junier Suite,149,True,False,False,501
+50,93,1,Standard,150,False,True,False,501
+51,88,2,Standard,151,True,True,True,501
+52,76,2,Standard,152,True,True,False,501
+53,103.49999999999999,2,Delux,153,False,True,True,501
+54,121.25,1,Junier Suite,154,True,False,True,501
+55,92,1,Standard,155,True,True,False,501
+56,115.0,2,Junier Suite,156,True,True,True,501
+57,89,2,Standard,157,False,False,False,501
+58,95.0,1,Junier Suite,158,True,True,True,501
+59,113.4,1,Suite,159,True,False,False,501
+60,101.19999999999999,2,Delux,160,True,True,False,501
+61,118.75,2,Junier Suite,161,False,True,False,501
+62,83,1,Standard,162,True,True,False,501
+63,111.55,1,Delux,163,True,True,False,501
+64,125.55000000000001,1,Suite,164,True,False,False,501
+65,135.0,1,Suite,165,True,True,False,501
+66,103.75,1,Junier Suite,166,False,True,False,501
+67,89,2,Standard,167,True,True,True,501
+68,102.5,2,Junier Suite,168,True,False,False,501
+69,95,1,Standard,169,False,True,False,501
+70,132.3,2,Suite,170,False,True,False,501
+71,103.49999999999999,1,Delux,171,True,True,True,501
+72,102.35,1,Delux,172,False,False,True,501
+73,124.2,1,Suite,173,False,False,True,501
+74,100.05,1,Delux,174,False,False,True,501
+75,101.25,1,Suite,175,True,True,True,501
+76,80,2,Standard,176,False,False,False,501
+77,118.80000000000001,1,Suite,177,True,False,True,501
+78,122.5,2,Junier Suite,178,False,False,False,501
+79,111.25,1,Junier Suite,179,True,True,False,501
+80,103.49999999999999,2,Delux,180,False,False,True,501
+81,83,2,Standard,181,True,False,True,501
+82,108.75,2,Junier Suite,182,True,False,False,501
+83,110.0,1,Junier Suite,183,True,True,False,501
+84,125.55000000000001,1,Suite,184,False,False,False,501
+85,112.5,2,Junier Suite,185,True,True,False,501
+86,95,2,Standard,186,True,True,False,501
+87,93,1,Standard,187,False,False,False,501
+88,130.95000000000002,1,Suite,188,False,True,True,501
+89,101.25,2,Junier Suite,189,False,True,False,501
+90,102.5,2,Junier Suite,190,True,False,True,501
+91,128.25,2,Suite,191,True,True,False,501
+92,128.25,2,Suite,192,False,True,True,501
+93,118.80000000000001,2,Suite,193,True,True,False,501
+94,117.5,2,Junier Suite,194,True,False,True,501
+95,92.0,1,Delux,195,False,True,False,501
+96,108.1,1,Delux,196,False,False,False,501
+97,90.85,2,Delux,197,True,True,True,501
+98,108.75,1,Junier Suite,198,True,True,False,501
+99,77,2,Standard,199,True,False,True,501

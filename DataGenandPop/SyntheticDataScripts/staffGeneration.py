@@ -21,16 +21,8 @@ last_names = [
 def generate_phone():
     return f"480-{random.randint(100,999)}-{random.randint(1000,9999)}"
 
-def generate_availability():
-    base = date(2026, 4, 1)
-    all_days = [base + timedelta(days=i) for i in range(7)]
-    count = random.randint(3, 7)
-    chosen = sorted(random.sample(all_days, count))
-    return chosen
-
-def dates_to_pg_array(dates):
-    inner = ",".join(f"'{d}'" for d in dates)
-    return f"ARRAY[{inner}]::DATE[]"
+def rand_bool():
+    return random.choice([True, False])
 
 # build 28 staff: 20 housekeepers (id 1-20) + 8 front workers (id 21-28)
 staff = []
@@ -54,10 +46,17 @@ for s in staff:
 
 print("\n-- Housekeeper inserts")
 for s in housekeepers:
-    avail = generate_availability()
+    mon = rand_bool()
+    tues = rand_bool()
+    wed = rand_bool()
+    thurs = rand_bool()
+    fri = rand_bool()
+    sat = rand_bool()
+    sun = rand_bool()
+
     print(
-        f"INSERT INTO Housekeeper (staffid, availability) "
-        f"VALUES ({s['id']}, {dates_to_pg_array(avail)});"
+        "INSERT INTO Housekeeper (StaffID, MonAvail, TuesAvail, WedAvail, ThursdAvail, FriAvail, SatAvail, SunAvail) "
+        f"VALUES ({s['id']}, {mon}, {tues}, {wed}, {thurs}, {fri}, {sat}, {sun});"
     )
 
 print("\n-- FrontWorker inserts")

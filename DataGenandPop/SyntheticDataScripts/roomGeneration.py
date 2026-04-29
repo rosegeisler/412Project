@@ -32,6 +32,6 @@ with open(filename, mode='w', newline='') as file:
         buildingID = 501
 
         writer.writerow([
-            roomID, bedCount, roomType, roomNumber,
+            roomID, price, bedCount, roomType, roomNumber,
             petFriendly, accessible, smokeFree, buildingID
         ])

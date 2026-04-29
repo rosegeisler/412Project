@@ -8,8 +8,8 @@ CREATE TYPE STATUS AS ENUM ('Reserved', 'Paid', 'Canceled');
 
 CREATE Table Guest (
 	GuestID SERIAL PRIMARY KEY, 
-	GuestName TEXT NOT NULL,
-	PhoneNumber BIGINT NOT NULL UNIQUE,
+	GuestName VARCHAR(100) NOT NULL,
+	PhoneNumber VARCHAR(20) NOT NULL UNIQUE,
 	Age SMALLINT CHECK (Age >= 18),
 	LoyaltyMember BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -24,7 +24,7 @@ CREATE TABLE Location (
 
 CREATE Table Room (
 	RoomID SERIAL PRIMARY KEY,
-	Price SMALLINT NOT NULL check(Price > 0),
+	Price NUMERIC(10, 2) NOT NULL check(Price > 0),
 	BedCount SMALLINT NOT NULL check(BedCount > 0),
 	RoomType TEXT NOT NULL,
 	RoomNumber TEXT NOT NULL,
@@ -34,24 +34,10 @@ CREATE Table Room (
     BuildingID INT references Location(BuildingID) NOT NULL
 );
 
-CREATE TABLE Booking (
-	BookingID SERIAL PRIMARY KEY,
-	RoomID INT NOT NULL REFERENCES Room (RoomID),
-	StartDate DATE NOT NULL CHECK (StartDate >= CURRENT_DATE), 
-	EndDate DATE NOT NULL CHECK (EndDate >= StartDate),
-	GuestID INT NOT NULL REFERENCES Guest (GuestID),
-	CheckedIn BOOLEAN NOT NULL,
-	CheckedOut BOOLEAN NOT NULL,
-	Ready BOOLEAN NOT NULL,
-	Housekeeper INT REFERENCES Housekeeper(StaffID)
-	Status STATUS NOT NULL DEFAULT 'Reserved'
-);
-
-
 CREATE TABLE Staff (
     StaffID SERIAL PRIMARY KEY,
     Name VARCHAR(100) NOT NULL,
-    PhoneNumber VARCHAR(15) NOT NULL,
+    PhoneNumber VARCHAR(20) NOT NULL,
     BuildingID INTEGER NOT NULL REFERENCES Location(buildingid)
 );
 
@@ -68,9 +54,22 @@ CREATE TABLE Housekeeper (
 
 CREATE TABLE FrontWorker (
     StaffID INT PRIMARY KEY REFERENCES Staff(staffid) ON DELETE CASCADE,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL
+    Username VARCHAR(50) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL
 );
 
 
+CREATE TABLE Booking (
+	BookingID SERIAL PRIMARY KEY,
+	RoomID INT NOT NULL REFERENCES Room (RoomID),
+	StartDate DATE NOT NULL CHECK (StartDate >= '2026-01-01'), 
+	EndDate DATE NOT NULL CHECK (EndDate >= StartDate),
+	BookingPrice NUMERIC(10, 2) Not NULL check(BookingPrice > 0.0),
+	GuestID INT NOT NULL REFERENCES Guest (GuestID),
+	CheckedIn BOOLEAN NOT NULL,
+	CheckedOut BOOLEAN NOT NULL,
+	Ready BOOLEAN NOT NULL,
+	Housekeeper INT REFERENCES Housekeeper(StaffID),
+	Status STATUS NOT NULL DEFAULT 'Reserved'
+);
 
