@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Panel from "../../../../components/Panel";
 
 export default function Home() {
     const router = useRouter();
@@ -19,7 +20,6 @@ export default function Home() {
             return;
         }
 
-
         router.push("/Pages/CreateBooking/AvailableRooms");
     };
 
@@ -34,8 +34,9 @@ export default function Home() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="w-full max-w-md space-y-4 text-center">
+    <div className="min-h-screen flex items-center justify-center">
+        <div className="w-full max-w-md space-y-4 text-center">
+            <Panel>
                 <h1>New Booking- Select Dates</h1>
                 <div className="flex">
                     <label> Check In Date: </label>
@@ -65,8 +66,8 @@ export default function Home() {
                         onClick={seeRooms}>
                         Next
                     </button>
-
                 </div>
+                </Panel>
             </div>
         </div>
     );

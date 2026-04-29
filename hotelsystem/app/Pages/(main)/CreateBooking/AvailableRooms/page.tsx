@@ -1,6 +1,7 @@
 "use client";
 import SearchButton from "../../../../components/SearchButton"; 
 import { useRouter } from "next/navigation";
+import Panel from "../../../../components/Panel";
 
 export default function Home() {
     const router = useRouter();
@@ -9,10 +10,10 @@ export default function Home() {
         router.push("/Pages/CreateBooking/BookingConfirmation");
     };
 
-
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="w-full  space-y-4 text-center">
+            <Panel>
                 <h1>New Booking-- Available Rooms:</h1>
                 <div className="flex">
                     <label>Bed Count:</label>
@@ -45,7 +46,8 @@ export default function Home() {
                     onClick={finishBooking}>
                     Book
                 </button>
-            </div>
+            </Panel>
         </div>
-    );
+    </div>
+);
 }
