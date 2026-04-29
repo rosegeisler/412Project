@@ -16,6 +16,8 @@ chmod +x setup.sh
 
 ./setup.sh
 
+pip install requirements.txt or equivalent
+
 
 
 
