@@ -35,7 +35,7 @@ export default function Home() {
     try {
       setResults([]);
       const res = await fetch(
-        `http://127.0.0.1:5000/NewBooking/SelectGuest?textEntry=${searchText}`
+        `/api/NewBooking/SelectGuest?textEntry=${searchText}`
       );
       const data = await res.json();
       setResults(data);
