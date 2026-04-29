@@ -1,1 +1,0 @@
-DELETE FROM Staff WHERE StaffID = 3;

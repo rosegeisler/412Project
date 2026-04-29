@@ -1,3 +1,0 @@
-SELECT * FROM Booking
-WHERE GuestID = 3014
-ORDER BY StartDate ASC; 

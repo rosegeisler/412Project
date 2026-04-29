@@ -3,10 +3,11 @@ DROP TABLE IF EXISTS Room CASCADE;
 DROP TABLE IF EXISTS Guest CASCADE;
 DROP TABLE IF EXISTS Booking CASCADE;
 
+
 CREATE TYPE STATUS AS ENUM ('Reserved', 'Paid', 'Canceled');
 
 CREATE Table Guest (
-	GuestID INT PRIMARY KEY, 
+	GuestID SERIAL PRIMARY KEY, 
 	GuestName TEXT NOT NULL,
 	PhoneNumber BIGINT NOT NULL UNIQUE,
 	Age SMALLINT CHECK (Age >= 18),
@@ -14,7 +15,7 @@ CREATE Table Guest (
 );
 
 CREATE TABLE Location (
-	BuildingID INT PRIMARY KEY,
+	BuildingID SERIAL PRIMARY KEY,
 	Amenities TEXT,
 	Address TEXT NOT NULL,
 	PhoneNumber VARCHAR(20) NOT NULL,
@@ -22,7 +23,7 @@ CREATE TABLE Location (
 );
 
 CREATE Table Room (
-	RoomID INT PRIMARY KEY,
+	RoomID SERIAL PRIMARY KEY,
 	Price SMALLINT NOT NULL check(Price > 0),
 	BedCount SMALLINT NOT NULL check(BedCount > 0),
 	RoomType TEXT NOT NULL,
@@ -34,7 +35,7 @@ CREATE Table Room (
 );
 
 CREATE TABLE Booking (
-	BookingID INT PRIMARY KEY,
+	BookingID SERIAL PRIMARY KEY,
 	RoomID INT NOT NULL REFERENCES Room (RoomID),
 	StartDate DATE NOT NULL CHECK (StartDate >= CURRENT_DATE), 
 	EndDate DATE NOT NULL CHECK (EndDate >= StartDate),
@@ -42,34 +43,33 @@ CREATE TABLE Booking (
 	CheckedIn BOOLEAN NOT NULL,
 	CheckedOut BOOLEAN NOT NULL,
 	Ready BOOLEAN NOT NULL,
+	Housekeeper INT REFERENCES Housekeeper(StaffID)
 	Status STATUS NOT NULL DEFAULT 'Reserved'
-
-
 );
 
 
 CREATE TABLE Staff (
-    staffid       INTEGER PRIMARY KEY,
-    name          VARCHAR(100) NOT NULL,
-    phonenumber   VARCHAR(15) NOT NULL,
-    buildingid    INTEGER NOT NULL REFERENCES Location(buildingid)
+    StaffID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    PhoneNumber VARCHAR(15) NOT NULL,
+    BuildingID INTEGER NOT NULL REFERENCES Location(buildingid)
 );
 
 CREATE TABLE Housekeeper (
-    staffid       INTEGER PRIMARY KEY REFERENCES Staff(staffid) ON DELETE CASCADE,
-    availability  DATE[] DEFAULT '{}'
-);
-
-CREATE TABLE HousekeeperBooking (
-    staffid       INTEGER NOT NULL REFERENCES Housekeeper(staffid) ON DELETE CASCADE,
-    bookingid     INTEGER NOT NULL REFERENCES Booking(bookingid) ON DELETE CASCADE,
-    PRIMARY KEY (staffid, bookingid)
+    StaffID INT PRIMARY KEY REFERENCES Staff(StaffID) ON DELETE CASCADE,
+	MonAvail BOOLEAN DEFAULT FALSE,
+	TuesAvail BOOLEAN DEFAULT FALSE,
+	WedAvail BOOLEAN DEFAULT FALSE,
+	ThursdAvail BOOLEAN DEFAULT FALSE,
+	FriAvail BOOLEAN DEFAULT FALSE,
+	SatAvail BOOLEAN DEFAULT FALSE,
+	SunAvail BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE FrontWorker (
-    staffid       INTEGER PRIMARY KEY REFERENCES Staff(staffid) ON DELETE CASCADE,
-    username      VARCHAR(50) UNIQUE NOT NULL,
-    password      VARCHAR(255) NOT NULL
+    StaffID INT PRIMARY KEY REFERENCES Staff(staffid) ON DELETE CASCADE,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
 );
 
 
