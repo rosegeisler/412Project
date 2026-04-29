@@ -7,13 +7,14 @@ CORS(app)
 
 
 
-conn = psycopg2.connect(
     dbname="dbname",
-    user="ur_user",
-    password="ur_pw",
-    host="localhost",
-    port="5432"
-)
+# conn = psycopg2.connect(
+#     dbname="dbname",
+#     user="ur_user",
+#     password="ur_pw",
+#     host="localhost",
+#     port="5432"
+# )
 cur = conn.cursor()
 
 @app.route("/")
@@ -48,10 +49,10 @@ def CreateBooking():
 
 @app.route("/CreateNewGuest")
 def NewGuest():
-    guestName = ""
-    phoneNumber = ""
-    age = ""
-    loyalty = ""
+    guestName = request.args.get("guestName", "").strip()
+    phoneNumber = request.args.get("phoneNumber", "").strip()
+    age = request.args.get("age", "").strip()
+    loyalty = request.args.get("loyalty", "").strip()
 
 
     query = """

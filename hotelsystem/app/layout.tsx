@@ -7,7 +7,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="min-h-screen bg-[url('/hotelBackground.png')] bg-cover bg-center">
+        {children}
+      </body>
     </html>
   );
 }
