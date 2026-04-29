@@ -12,8 +12,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-sm space-y-4 text-center">
-        <h1>Company Name Login</h1>
+      <div className="bg-panel-dark  text-white shadow-md w-full max-w-sm space-y-4 text-center p-8">
+        <h1  className="panel-large-text" >Company Name Login</h1>
         <input className="textfield" placeholder="Username" />
         <input className="textfield" placeholder="Password" />
         <button 
