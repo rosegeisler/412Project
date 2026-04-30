@@ -28,9 +28,9 @@ CREATE Table Room (
 	BedCount SMALLINT NOT NULL check(BedCount > 0),
 	RoomType TEXT NOT NULL,
 	RoomNumber TEXT NOT NULL,
-	PetFriendly BOOL NOT NULL,
-	Accessible BOOL NOT NULL,
-	SmokeFree BOOL NOT NULL,
+	PetFriendly BOOLEAN NOT NULL,
+	Accessible BOOLEAN NOT NULL,
+	SmokeFree BOOLEAN NOT NULL,
     BuildingID INT references Location(BuildingID) NOT NULL
 );
 

@@ -10,6 +10,7 @@ export default function Home() {
   const [searchText, setSearchText] = useState("");
   const [results, setResults] = useState<Guest[]>([]);
   const [selectedGuestId, setSelectedGuestId] = useState<number | null>(null);
+  const [errorLabel, setError] = useState("");
 
   type Guest = {
     GuestID: number;
@@ -28,7 +29,7 @@ export default function Home() {
       return
     }
 
-    router.push('/Pages/CreateBooking/BookingDates')
+    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${selectedGuestId}`)
   };
 
   const handleSearch = async () => {

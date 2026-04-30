@@ -14,8 +14,11 @@ export default function Home() {
   const createGuest = async () => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:5000/CreateNewGuest?guestName=${guestName}&phoneNumber=${phoneNumber}&age=${age}&loyalty=${loyalty}`
+        `/api/CreateNewGuest?guestName=${guestName}&phoneNumber=${phoneNumber}&age=${age}&loyalty=${loyalty}`
       );
+      const data = await res.json();
+      const guestId = data.GuestID;
+      return guestId;
     } catch (err) {
       console.error("Search failed:", err);
     }
@@ -47,9 +50,9 @@ export default function Home() {
       return
     } 
 
-    createGuest()
+    const id = createGuest()
 
-    router.push('/Pages/CreateBooking/BookingDates')
+    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${id}`)
   };
 
 return (

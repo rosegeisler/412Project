@@ -2,9 +2,13 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Panel from "../../../../components/Panel";
+import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const guestID = searchParams.get('GuestID')
+
     const [checkInDate, setCheckIn] = useState("");
     const [checkOutDate, setCheckOut] = useState("");
     const [errorLabel, setError] = useState("");
@@ -19,8 +23,7 @@ export default function Home() {
             setError("Check-in must be before check-out");
             return;
         }
-
-        router.push("/Pages/CreateBooking/AvailableRooms");
+        router.push(`/Pages/CreateBooking/AvailableRooms?CheckIn=${checkInDate}&CheckOut=${checkOutDate}&GuestID=${guestID}`);
     };
 
     const getTomorrow = () => {
@@ -58,9 +61,6 @@ export default function Home() {
                 </div>
                 <h1>{errorLabel}</h1>
                 <div className="flex">
-                    <button className="btn w-fit px-6">
-                        Pay Now
-                    </button>
                     <button 
                         className="btn w-fit px-6"
                         onClick={seeRooms}>
