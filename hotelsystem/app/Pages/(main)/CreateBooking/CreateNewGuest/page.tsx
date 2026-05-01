@@ -57,23 +57,30 @@ export default function Home() {
 
 return (
   <Panel>
-    <div className="min-h-screen flex items-center justify-center">
-      <div className=" w-full max-w-md space-y-4 text-center">
+    <div className="flex justify-between ">
+      <h1 className="text-2xl text-white">New Booking- New Guest</h1>
+    </div>
 
-          <h1>New Booking- New Guest</h1>
-          <input className="textfield" placeholder="Guest Name" value={guestName} onChange={(e) => setGuestName(e.target.value)} />
-          <input type="tel" className="textfield" value={phoneNumber} 
-          onChange={(e) => setPhoneNumber(e.target.value)} placeholder="Phone Number" />
-          <input className="textfield" placeholder="Age" value={age} onChange={(e)=> setAge(e.target.value)} />
-          <input type="checkbox" value={loyalty} onChange={(e) => setLoyalty(e.target.value)}/>
-          <label> Start Loyalty Membership </label>
-          <h2>{errorLabel}</h2>
-          <button 
-              className="btn"
-              onClick={bookingDates}>
-              Next
-          </button>
+    <input className="textfield" placeholder="Guest Name" value={guestName} onChange={(e) => setGuestName(e.target.value)} />
+    <input type="tel" className="textfield" value={phoneNumber} 
+    onChange={(e) => setPhoneNumber(e.target.value)} placeholder="Phone Number" />
+    <input className="textfield" placeholder="Age" value={age} onChange={(e)=> setAge(e.target.value)} />
+    
+    <div className="flex justify-between">
+      <div>
+        <input type="checkbox" value={loyalty} onChange={(e) => setLoyalty(e.target.value)}/>
+        <label className=" text-white"> Start Loyalty Membership </label>
       </div>
+    </div>
+    
+    <h2>{errorLabel}</h2>
+
+    <div className="flex justify-end">
+      <button 
+        className="btn"
+        onClick={bookingDates}>
+        Next
+      </button>
     </div>
   </Panel>
 );

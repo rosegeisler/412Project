@@ -37,38 +37,39 @@ export default function Home() {
     };
 
     return (
-    <div className="min-h-screen flex items-center justify-center">
-        <div className="w-full max-w-md space-y-4 text-center">
-            <Panel>
+        <Panel>
+            <div className="text-white">
                 <h1>New Booking- Select Dates</h1>
-                <div className="flex">
+                <div className="flex gap-3">
                     <label> Check In Date: </label>
                     <input 
                         type="date"
                         value={checkInDate}
                         min={getToday()} 
                         onChange={(e) => setCheckIn(e.target.value)}>
-                        </input>
+                    </input>
                 </div>
-                <div className="flex">
+
+                <div className="flex gap-3">
                     <label> Check Out Date: </label>
                     <input     
                         type="date"
                         value={checkOutDate}
                         min={getTomorrow()}
                         onChange={(e) => setCheckOut(e.target.value)}>
-                        </input>
+                    </input>
                 </div>
+
                 <h1>{errorLabel}</h1>
-                <div className="flex">
+
+                <div className="flex justify-end">
                     <button 
                         className="btn w-fit px-6"
                         onClick={seeRooms}>
                         Next
                     </button>
                 </div>
-                </Panel>
             </div>
-        </div>
+        </Panel>
     );
 }

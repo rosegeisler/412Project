@@ -24,8 +24,8 @@ export default function Home() {
   };
 
   const bookingDates = () => {
-    //TODO: Verify Guest has been selected
     if(!selectedGuestId){
+      setError("Must Select guest to proceed.")
       return
     }
 
@@ -46,70 +46,67 @@ export default function Home() {
   };
 
   return (
-          <Panel>
-              <div className="flex justify-between text-white">
-                <h1 className="text-2xl">New Booking- Guest Selection</h1>
-                <button 
-                  onClick={newGuest}
-                  className="btn w-fit px-6">
-                  Create new guest
-                </button>
+    <Panel>
+      <div className="flex justify-between text-white">
+        <h1 className="text-2xl">New Booking- Guest Selection</h1>
+        <button 
+          onClick={newGuest}
+          className="btn w-fit px-6">
+          Create new guest
+        </button>
+      </div>
 
-              </div>
+      <div  className= "flex ">
+        <input
+        className="textfield" 
+        placeholder="Guest Name"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)} />
+        <SearchButton onClick={handleSearch} />
+      </div>
 
-                <div  className= "flex ">
-                  <input
-                    className="textfield" 
-                    placeholder="Guest Name"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)} />
-                  <SearchButton onClick={handleSearch} />
-                </div>
+      <div className="table-div-style">
+        <table className="table-style">
+          <thead>
+            <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Loyalty</th>
+            </tr>
+          </thead>
 
-                
-                <div className="table-div-style">
-                  <table className="table-style">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Loyalty</th>
-                      </tr>
-                    </thead>
+          <tbody>
+            {results.map((guest, index) => {
+            const isSelected = selectedGuestId === guest.GuestID;
+            return (
+              <tr
+                key={guest.GuestID}
+                onClick={() => setSelectedGuestId(guest.GuestID)}
+                className={`
+                ${index % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}
+                ${isSelected ? "bg-gray-700 border white" : ""}
+                hover:bg-gray-700`}>
+                <td className="p-3">{guest.GuestID}</td>
+                <td className="p-3">{guest.GuestName}</td>
+                <td className="p-3">{guest.PhoneNumber}</td>
+                <td className="p-3">{guest.LoyaltyMember ? "Yes" : "No"}</td>
+              </tr>
+            );})}
+          </tbody>
+        </table>
+      </div>
 
-                    <tbody>
-                      {results.map((guest, index) => {
-                        const isSelected = selectedGuestId === guest.GuestID;
+      <h2>{errorLabel}</h2>
 
-                        return (
-                          <tr
-                            key={guest.GuestID}
-                            onClick={() => setSelectedGuestId(guest.GuestID)}
-                            className={`
-                              ${index % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}
-                              ${isSelected ? "bg-gray-700 border white" : ""}
-                              hover:bg-gray-700
-                            `}
-                          >
-                            <td className="p-3">{guest.GuestID}</td>
-                            <td className="p-3">{guest.GuestName}</td>
-                            <td className="p-3">{guest.PhoneNumber}</td>
-                            <td className="p-3">{guest.LoyaltyMember ? "Yes" : "No"}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  
-                  </table>
-                </div>
-                <div className="flex justify-end">
-                  <button
-                    className="btn"
-                    onClick={bookingDates}>
-                    Next
-                  </button>
-                </div>
-        </Panel>
+      <div className="flex justify-end">
+        <button
+        className="btn"
+        onClick={bookingDates}>
+        Next
+        </button>
+      </div>
+      
+    </Panel>
   );
 }

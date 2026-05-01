@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Panel from "../../../components/Panel";
 
 export default function Home() {
   const router = useRouter();
