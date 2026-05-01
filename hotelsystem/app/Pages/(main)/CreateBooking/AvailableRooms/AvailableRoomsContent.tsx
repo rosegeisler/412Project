@@ -20,6 +20,8 @@ export default function AvailableRoomsContent() {
   const [results, setResults] = useState<Room[]>([]);
   const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
 
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
+
   type Room = {
       RoomID: number;
       RoomNumber: string;
@@ -34,7 +36,7 @@ export default function AvailableRoomsContent() {
   const createBooking = async () => {
     try {
       const res = await fetch(
-        `/api/CreateBooking?roomID=${selectedRoomId}&startDate=${checkIn}&endDate=${checkOut}&guestID=${guestID}`
+        `${API_BASE}/CreateBooking?roomID=${selectedRoomId}&startDate=${checkIn}&endDate=${checkOut}&guestID=${guestID}`
       );
     } catch (err) {
       console.error("Search failed:", err);
@@ -54,7 +56,7 @@ export default function AvailableRoomsContent() {
       try {
           setResults([]);
           const res = await fetch(
-          `/api/CreateBooking/FindAvailableRooms?checkIn=${checkIn}&checkOut=${checkOut}&bedCount=${bedCount}&petFriendly=${petFriendlyParam}&accessible=${accessibleParam}&smokeFree=${smokeFreeParam}`
+          `${API_BASE}/CreateBooking/FindAvailableRooms?checkIn=${checkIn}&checkOut=${checkOut}&bedCount=${bedCount}&petFriendly=${petFriendlyParam}&accessible=${accessibleParam}&smokeFree=${smokeFreeParam}`
           );
           const data = await res.json();
           setResults(data);

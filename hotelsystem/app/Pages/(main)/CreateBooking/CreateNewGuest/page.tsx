@@ -3,6 +3,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Panel from "../../../../components/Panel";
 
+
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
+
 export default function Home() {
   const router = useRouter();
   const [guestName, setGuestName] = useState("");
@@ -14,7 +17,7 @@ export default function Home() {
   const createGuest = async () => {
     try {
       const res = await fetch(
-        `/api/CreateNewGuest?guestName=${guestName}&phoneNumber=${phoneNumber}&age=${age}&loyalty=${loyalty}`
+        `${API_BASE}/CreateNewGuest?guestName=${guestName}&phoneNumber=${phoneNumber}&age=${age}&loyalty=${loyalty}`
       );
       const data = await res.json();
       const guestId = data.GuestID;

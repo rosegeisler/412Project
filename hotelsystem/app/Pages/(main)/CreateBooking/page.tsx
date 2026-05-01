@@ -5,6 +5,8 @@ import { useState } from "react";
 import Panel from "../../../components/Panel";
 
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
+
 export default function Home() {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
@@ -36,7 +38,7 @@ export default function Home() {
     try {
       setResults([]);
       const res = await fetch(
-        `/api/NewBooking/SelectGuest?textEntry=${searchText}`
+        `${API_BASE}/NewBooking/SelectGuest?textEntry=${searchText}`
       );
       const data = await res.json();
       setResults(data);
