@@ -1,10 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Panel from "../../../../components/Panel";
 import { useSearchParams } from 'next/navigation'
 
-export default function Home() {
+function BookingDatesContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const guestID = searchParams.get('GuestID')
@@ -71,5 +71,13 @@ export default function Home() {
                 </div>
             </div>
         </Panel>
+    );
+}
+
+export default function Home() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <BookingDatesContent />
+        </Suspense>
     );
 }
