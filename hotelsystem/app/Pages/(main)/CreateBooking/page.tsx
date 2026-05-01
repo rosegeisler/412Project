@@ -46,21 +46,18 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-        <div className="w-full max-w-md space-y-4 text-center">
           <Panel>
-              <div className="flex">
-                <h1>New Booking- Guest Selection</h1>
+              <div className="flex justify-between text-white">
+                <h1 className="text-2xl">New Booking- Guest Selection</h1>
                 <button 
                   onClick={newGuest}
                   className="btn w-fit px-6">
-                  + Create new guest
-                  
+                  Create new guest
                 </button>
 
               </div>
 
-                <div  className= "flex">
+                <div  className= "flex ">
                   <input
                     className="textfield" 
                     placeholder="Guest Name"
@@ -68,8 +65,10 @@ export default function Home() {
                     onChange={(e) => setSearchText(e.target.value)} />
                   <SearchButton onClick={handleSearch} />
                 </div>
-                <div className="max-h-80 overflow-y-auto mt-4">
-                  <table >
+
+                
+                <div className="table-div-style">
+                  <table className="table-style">
                     <thead>
                       <tr>
                         <th>ID</th>
@@ -88,18 +87,15 @@ export default function Home() {
                             key={guest.GuestID}
                             onClick={() => setSelectedGuestId(guest.GuestID)}
                             className={`
-                              cursor-pointer
-                              transition
-                              text-gray-200
                               ${index % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}
-                              ${isSelected ? "bg-gray-700 border-2 white-500" : ""}
+                              ${isSelected ? "bg-gray-700 border white" : ""}
                               hover:bg-gray-700
                             `}
                           >
-                            <td className="p-2">{guest.GuestID}</td>
-                            <td className="p-2">{guest.GuestName}</td>
-                            <td className="p-2">{guest.PhoneNumber}</td>
-                            <td className="p-2">{guest.LoyaltyMember ? "Yes" : "No"}</td>
+                            <td className="p-3">{guest.GuestID}</td>
+                            <td className="p-3">{guest.GuestName}</td>
+                            <td className="p-3">{guest.PhoneNumber}</td>
+                            <td className="p-3">{guest.LoyaltyMember ? "Yes" : "No"}</td>
                           </tr>
                         );
                       })}
@@ -107,13 +103,13 @@ export default function Home() {
                   
                   </table>
                 </div>
-                <button
-                  className="btn"
-                  onClick={bookingDates}>
-                  Next
-                </button>
+                <div className="flex justify-end">
+                  <button
+                    className="btn"
+                    onClick={bookingDates}>
+                    Next
+                  </button>
+                </div>
         </Panel>
-      </div>
-    </div>
   );
 }

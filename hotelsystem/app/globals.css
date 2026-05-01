@@ -21,4 +21,13 @@
   .panel-large-text {
     @apply text-white text-2xl font-semibold;
   }
+  .table-div-style {
+    @apply
+      max-h-80 overflow-y-auto mt-4 w-full
+  }
+  .table-style {
+    @apply 
+    w-full bg-gray-900 text-white
+
+  }
 }

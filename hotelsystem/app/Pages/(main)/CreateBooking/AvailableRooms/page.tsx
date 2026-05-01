@@ -66,89 +66,79 @@ export default function Home() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="w-full  space-y-4 text-center">
-            <Panel>
-                <h1>New Booking-- Available Rooms:</h1>
-                <div className="flex">
-                    <label>Bed Count:</label>
-                    <select value={bedCount}
-                    onChange={(e) => setBedCount(e.target.value)} >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-
-                    <label>Room Type:</label>
-                    <select value={roomType}
-                        onChange={(e) => setRoomType(e.target.value)} >
-                        <option value="Standard">Standard</option>
-                        <option value="Delux">Delux</option>
-                        <option value="Junior Suite">Junior Suite</option>
-                        <option value="Suite">Suite</option>
-                    </select>
-
-                    <input type="checkbox" checked={petFriendly} onChange={(e) => setPetFriendly(e.target.checked)} />
-                    <label>Pet Friendly:</label>
-
-                    <input type="checkbox" checked={smokeFree} onChange={(e) => setSmokeFree(e.target.checked)} />
-                    <label>Smoke Free:</label>
-
-                    <input type="checkbox" checked={accessible} onChange={(e) => setAccessible(e.target.checked)} />
-<label>Accessible:</label>
-                    <SearchButton onClick={displayAvailableRooms} />
-                </div>
-                <div className="max-h-80 overflow-y-auto mt-4">
-                  <table >
-                    <thead>
-                      <tr>
-                        <th>Room Number</th>
-                        <th>Price</th>
-                        <th>Room Type</th>
-                        <th>Bed Count</th>
-                        <th>Pet Friendly</th>
-                        <th>Accessible</th>
-                        <th>Smoke Free</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {results.map((room, index) => {
-                        const isSelected = selectedRoomId === room.RoomID;
-
-                        return (
-                          <tr
-                            key={room.RoomID}
-                            onClick={() => setSelectedRoomId(room.RoomID)}
-                            className={`
-                              cursor-pointer
-                              transition
-                              text-gray-200
-                              ${index % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}
-                              ${isSelected ? "bg-gray-700 border-2 white-500" : ""}
-                              hover:bg-gray-700
-                            `}
-                          >
-                            <td className="p-2">{room.RoomNumber}</td>
-                            <td className="p-2">{room.Price}</td>
-                            <td className="p-2">{room.RoomType}</td>
-                            <td className="p-2">{room.BedCount}</td>
-                            <td className="p-2">{room.PetFriendly ? "Yes" : "No"}</td>
-                            <td className="p-2">{room.Accessible ? "Yes" : "No"}</td>
-                            <td className="p-2">{room.SmokeFree ? "Yes" : "No"}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  
-                  </table>
-                </div>
-                <button 
-                    className="btn w-fit px-6"
-                    onClick={finishBooking}>
-                    Book
-                </button>
-            </Panel>
+      <Panel>
+        <div className="flex justify-between text-white">
+          <h1 className="text-2xl">New Booking- Available Rooms:</h1>
         </div>
-    </div>
+          <div className="flex justify-between">
+              <label>Bed Count:</label>
+              <select value={bedCount}
+              onChange={(e) => setBedCount(e.target.value)} >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+              </select>
+
+              <label>Pet Friendly:</label>
+              <input type="checkbox" checked={petFriendly} onChange={(e) => setPetFriendly(e.target.checked)} />
+
+              <label>Smoke Free:</label>
+              <input type="checkbox" checked={smokeFree} onChange={(e) => setSmokeFree(e.target.checked)} />
+
+              <label>Accessible:</label>
+              <input type="checkbox" checked={accessible} onChange={(e) => setAccessible(e.target.checked)} />
+              <SearchButton onClick={displayAvailableRooms} />
+          </div>
+          
+          
+          <div className="table-div-style">
+            <table className="table-style">
+              <thead>
+                <tr>
+                  <th>Room Number</th>
+                  <th>Price</th>
+                  <th>Room Type</th>
+                  <th>Bed Count</th>
+                  <th>Pet Friendly</th>
+                  <th>Accessible</th>
+                  <th>Smoke Free</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {results.map((room, index) => {
+                  const isSelected = selectedRoomId === room.RoomID;
+
+                  return (
+                    <tr
+                      key={room.RoomID}
+                      onClick={() => setSelectedRoomId(room.RoomID)}
+                      className={`
+                        ${index % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}
+                        ${isSelected ? "bg-gray-700 border white" : ""}
+                        hover:bg-gray-700
+                      `}
+                    >
+                      <td className="p-3">{room.RoomNumber}</td>
+                      <td className="p-3">$ {room.Price}</td>
+                      <td className="p-3">{room.RoomType}</td>
+                      <td className="p-3">{room.BedCount}</td>
+                      <td className="p-3">{room.PetFriendly ? "Yes" : "No"}</td>
+                      <td className="p-3">{room.Accessible ? "Yes" : "No"}</td>
+                      <td className="p-3">{room.SmokeFree ? "Yes" : "No"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            
+            </table>
+          </div>
+          <div className="flex justify-end">
+            <button 
+                className="btn w-fit px-6"
+                onClick={finishBooking}>
+                Book
+            </button>
+          </div>
+      </Panel>
 );
 }
