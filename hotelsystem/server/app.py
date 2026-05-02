@@ -8,8 +8,8 @@ CORS(app)
 
 conn = psycopg2.connect(
     dbname="myhotel",
-    user="your username",
-    password="your password",
+    user="",
+    password="",
     host="localhost",
     port="5432"
 )
@@ -90,6 +90,7 @@ def CreateBooking():
 
     cur.execute(query, (roomID, startDate, endDate, totalPrice, guestId, checkedIn, checkedOut, ready))
     conn.commit()
+    return jsonify({"ok": True})
     
 
 @app.route("/CreateNewGuest")

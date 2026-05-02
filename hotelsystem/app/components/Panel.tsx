@@ -9,8 +9,9 @@ export default function Panel({ children }: { children: React.ReactNode }) {
           space-y-3 
           min-h-[60vh]
           text-center
+          flex
+          flex-col
           rounded-lg
-          inline-block
         ">
           {children}
         </div>

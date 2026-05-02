@@ -38,9 +38,11 @@ function BookingDatesContent() {
 
     return (
         <Panel>
-            <div className="text-white">
-                <h1>New Booking- Select Dates</h1>
-                <div className="flex gap-3">
+            <div className="text-white flex flex-col flex-1">
+                <div className="flex justify-between">
+                    <h1  className="text-2xl pb-8" >New Booking- Select Dates</h1>
+                </div>
+                <div className="flex gap-3 pb-8">
                     <label> Check In Date: </label>
                     <input 
                         type="date"
@@ -62,7 +64,7 @@ function BookingDatesContent() {
 
                 <h1>{errorLabel}</h1>
 
-                <div className="flex justify-end">
+                <div className="flex justify-end mt-auto">
                     <button 
                         className="btn w-fit px-6"
                         onClick={seeRooms}>

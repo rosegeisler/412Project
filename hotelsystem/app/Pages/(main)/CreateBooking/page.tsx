@@ -101,7 +101,7 @@ export default function Home() {
 
       <h2>{errorLabel}</h2>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-auto">
         <button
         className="btn"
         onClick={bookingDates}>

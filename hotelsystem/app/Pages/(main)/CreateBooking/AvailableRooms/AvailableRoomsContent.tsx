@@ -35,6 +35,7 @@ export default function AvailableRoomsContent() {
     
   const createBooking = async () => {
     try {
+      console.log("URL:", `${API_BASE}/CreateBooking?roomID=${selectedRoomId}&startDate=${checkIn}&endDate=${checkOut}&guestID=${guestID}`);
       const res = await fetch(
         `${API_BASE}/CreateBooking?roomID=${selectedRoomId}&startDate=${checkIn}&endDate=${checkOut}&guestID=${guestID}`
       );
@@ -48,7 +49,7 @@ export default function AvailableRoomsContent() {
       router.push("/Pages/CreateBooking/BookingConfirmation");
   };
 
-  const displayAvailableRooms = async () => {
+  const displayAvailableRooms = async (): Promise<void> =>{
       const petFriendlyParam = petFriendly ? "TRUE" : "FALSE";
       const accessibleParam = accessible ? "TRUE" : "FALSE";
       const smokeFreeParam = smokeFree ? "TRUE" : "FALSE";
