@@ -44,20 +44,26 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <div className="flex mt-8 mx-auto max-w-5xl px-4">
+      <div>
+
+      <Panel>
+    
+      <div className="flex auto">
         <input
           className="textfield flex-1"
           placeholder="Guest Name"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+
         />
         <SearchButton onClick={handleSearch} />
       </div>
 
-      <Panel>
+
+
         <div className="flex justify-between text-white">
-          <h1 className="text-2xl">Guests</h1>
+          
         </div>
 
         <div className="table-div-style">
@@ -101,7 +107,7 @@ export default function Home() {
                             e.stopPropagation();
                             handleDelete(guest.GuestID);
                            }}
-                            className="btn px-3 py-1 text-sm">
+                            className="bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-1 text-sm transition">
                             Delete
                         </button>
                     </td>

@@ -173,12 +173,14 @@ export default function Home() {
             placeholder="Guest Name Filter"
             value={guestNameFilter}
             onChange={(e) => setGuestNameFilter(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
           <input
             className="textfield flex-1 min-w-[160px]"
             placeholder="Room Number"
             value={roomNumberFilter}
             onChange={(e) => setRoomNumberFilter(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
           <input
             type="date"

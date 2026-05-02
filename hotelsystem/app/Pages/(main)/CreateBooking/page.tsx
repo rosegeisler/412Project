@@ -64,7 +64,8 @@ export default function Home() {
         className="textfield" 
         placeholder="Guest Name"
         value={searchText}
-        onChange={(e) => setSearchText(e.target.value)} />
+        onChange={(e) => setSearchText(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && handleSearch()} />
         <SearchButton onClick={handleSearch} />
       </div>
 
