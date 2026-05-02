@@ -7,15 +7,9 @@ app = Flask(__name__)
 CORS(app)
 
 conn = psycopg2.connect(
-<<<<<<< HEAD
     dbname="myhotel",
     user="",
     password="",
-=======
-    dbname="412_proj",
-    user="ksbanda",
-    password="banana5",
->>>>>>> karen-viewguests
     host="localhost",
     port="5432"
 )
