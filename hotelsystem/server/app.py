@@ -26,6 +26,25 @@ def APICALLNAME():
     #return the data
     return "Flask server is running"
 
+
+@app.route("/Login")
+def Login():
+    userName = request.args.get("username", "").strip()
+    password = request.args.get("password", "").strip()
+
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT f.staffid, s."name"
+        FROM FrontWorker f
+        JOIN Staff s ON f.staffid = s.staffid
+        WHERE f.username = %s AND f.password = %s
+    """, (userName, password))
+    row = cur.fetchone()
+
+    if row is None:
+        return jsonify({"error": "Invalid credentials"}), 401
+    return jsonify({"name": row[1]}), 200
+
 @app.route("/CreateBooking/FindAvailableRooms")
 def FindAvailableRooms():
     checkIn = request.args.get("checkIn", "").strip()

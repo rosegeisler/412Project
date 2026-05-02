@@ -13,6 +13,7 @@ export default function Home() {
   const [results, setResults] = useState<Guest[]>([]);
   const [selectedGuestId, setSelectedGuestId] = useState<number | null>(null);
   const [errorLabel, setError] = useState("");
+  
 
   type Guest = {
     GuestID: number;

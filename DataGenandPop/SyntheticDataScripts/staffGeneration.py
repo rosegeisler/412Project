@@ -68,4 +68,16 @@ for s in frontworkers:
         f"VALUES ({s['id']}, '{uname}', '{fake_hash}');"
     )
 
+print("\n-- Login Testing inserts")
+
+print("""
+
+INSERT INTO Staff (staffid, name, phonenumber, buildingid)
+VALUES (29, 'Alice Whales', '480-555-1234', 501);
+
+INSERT INTO FrontWorker (staffid, username, password)
+VALUES (29, 'awhales', 'password123');
+
+""")
+
 print(f"\n-- Total: {len(staff)} staff ({len(housekeepers)} housekeepers, {len(frontworkers)} front workers)")

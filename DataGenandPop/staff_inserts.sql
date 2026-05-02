@@ -61,3 +61,10 @@ INSERT INTO FrontWorker (staffid, username, password) VALUES (27, 'ywilliams', '
 INSERT INTO FrontWorker (staffid, username, password) VALUES (28, 'mlee', '$2b$12$g21nYCsXoblu17rNy8H6h8');
 
 -- Total: 28 staff (20 housekeepers, 8 front workers)
+
+-- Testing front worker
+INSERT INTO Staff (staffid, name, phonenumber, buildingid)
+VALUES (29, 'Alice Whales', '480-555-1234', 501);
+
+INSERT INTO FrontWorker (staffid, username, password)
+VALUES (29, 'awhales', 'password123');
