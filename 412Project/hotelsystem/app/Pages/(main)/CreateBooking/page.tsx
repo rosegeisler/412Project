@@ -1,5 +1,5 @@
 "use client";
-import SearchButton from "../../../components/SearchButton"; 
+import SearchButton from "../../../components/SearchButton";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Panel from "../../../components/Panel";
@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   const bookingDates = () => {
-    if(!selectedGuestId){
+    if (!selectedGuestId) {
       setError("Must Select guest to proceed.")
       return
     }
@@ -51,19 +51,19 @@ export default function Home() {
     <Panel>
       <div className="flex justify-between text-white">
         <h1 className="text-2xl">New Booking- Guest Selection</h1>
-        <button 
+        <button
           onClick={newGuest}
           className="btn w-fit px-6">
           Create new guest
         </button>
       </div>
 
-      <div  className= "flex ">
+      <div className="flex ">
         <input
-        className="textfield" 
-        placeholder="Guest Name"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)} />
+          className="textfield"
+          placeholder="Guest Name"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)} />
         <SearchButton onClick={handleSearch} />
       </div>
 
@@ -71,30 +71,31 @@ export default function Home() {
         <table className="table-style">
           <thead>
             <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Loyalty</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Loyalty</th>
             </tr>
           </thead>
 
           <tbody>
             {results.map((guest, index) => {
-            const isSelected = selectedGuestId === guest.GuestID;
-            return (
-              <tr
-                key={guest.GuestID}
-                onClick={() => setSelectedGuestId(guest.GuestID)}
-                className={`
+              const isSelected = selectedGuestId === guest.GuestID;
+              return (
+                <tr
+                  key={guest.GuestID}
+                  onClick={() => setSelectedGuestId(guest.GuestID)}
+                  className={`
                 ${index % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}
                 ${isSelected ? "bg-gray-700 border white" : ""}
                 hover:bg-gray-700`}>
-                <td className="p-3">{guest.GuestID}</td>
-                <td className="p-3">{guest.GuestName}</td>
-                <td className="p-3">{guest.PhoneNumber}</td>
-                <td className="p-3">{guest.LoyaltyMember ? "Yes" : "No"}</td>
-              </tr>
-            );})}
+                  <td className="p-3">{guest.GuestID}</td>
+                  <td className="p-3">{guest.GuestName}</td>
+                  <td className="p-3">{guest.PhoneNumber}</td>
+                  <td className="p-3">{guest.LoyaltyMember ? "Yes" : "No"}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -103,12 +104,12 @@ export default function Home() {
 
       <div className="flex justify-end">
         <button
-        className="btn"
-        onClick={bookingDates}>
-        Next
+          className="btn"
+          onClick={bookingDates}>
+          Next
         </button>
       </div>
-      
+
     </Panel>
   );
 }

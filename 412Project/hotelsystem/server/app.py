@@ -8,8 +8,8 @@ CORS(app)
 
 conn = psycopg2.connect(
     dbname="myhotel",
-    user="your username",
-    password="your password",
+    user="postgres",
+    password="Skylar22!",
     host="localhost",
     port="5432"
 )
