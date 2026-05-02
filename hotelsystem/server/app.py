@@ -7,9 +7,15 @@ app = Flask(__name__)
 CORS(app)
 
 conn = psycopg2.connect(
+<<<<<<< HEAD
     dbname="myhotel",
     user="",
     password="",
+=======
+    dbname="412_proj",
+    user="ksbanda",
+    password="banana5",
+>>>>>>> karen-viewguests
     host="localhost",
     port="5432"
 )
@@ -299,6 +305,75 @@ def ManageBookingsRemoveHousekeeper():
     )
     conn.commit()
     return jsonify({"ok": True})
+
+
+@app.route("/Guests", methods=["GET"])
+def ViewGuests():
+    conn.rollback()
+    textEntry = request.args.get("textEntry", "").strip()
+  
+
+    if textEntry:
+        query = """
+            SELECT 
+                g.GuestID,
+                g.GuestName,
+                g.LoyaltyMember,
+                COUNT(b.BookingID) AS TotalBookings,
+                COUNT(CASE WHEN b.EndDate < CURRENT_DATE THEN 1 END) AS PassedBookings,
+                COUNT(CASE WHEN b.StartDate > CURRENT_DATE THEN 1 END) AS UpcomingBookings,
+                MIN(CASE WHEN b.StartDate > CURRENT_DATE THEN b.StartDate END) AS NextBooking,
+                g.PhoneNumber
+            FROM Guest g
+            LEFT JOIN Booking b ON g.GuestID = b.GuestID
+            WHERE g.GuestName ILIKE %s
+            GROUP BY g.GuestID, g.GuestName, g.PhoneNumber, g.LoyaltyMember;
+        """
+        cur.execute(query, (f"%{textEntry}%",))
+    else:
+        query = """
+            SELECT
+                g.GuestID, 
+                g.GuestName,
+                g.LoyaltyMember,
+                COUNT(b.BookingID) AS TotalBookings,
+                COUNT(CASE WHEN b.EndDate < CURRENT_DATE THEN 1 END) AS PassedBookings,
+                COUNT(CASE WHEN b.StartDate > CURRENT_DATE THEN 1 END) AS UpcomingBookings,
+                MIN(CASE WHEN b.StartDate > CURRENT_DATE THEN b.StartDate END) AS NextBooking,
+                g.PhoneNumber
+            FROM Guest g
+            LEFT JOIN Booking b ON g.GuestID = b.GuestID
+            GROUP BY g.GuestID, g.GuestName, g.PhoneNumber, g.LoyaltyMember;
+        """
+        cur.execute(query)
+
+    rows = cur.fetchall()
+
+    return jsonify([
+        {
+            "GuestID": r[0],
+            "GuestName": r[1],
+            "LoyaltyMember": r[2],
+            "TotalBookings": r[3],
+            "PassedBookings": r[4],
+            "UpcomingBookings": r[5],
+            "NextBooking": r[6].strftime("%Y-%m-%d") if r[6] else None,
+            "PhoneNumber": r[7],
+            
+        }
+        for r in rows
+    ])
+
+@app.route("/Guests/Delete", methods=["DELETE"])
+def DeleteGuest():
+    guestId = request.args.get("guestID", "").strip()
+
+    cur.execute("DELETE FROM Booking WHERE GuestID = %s;", (guestId,))
+    cur.execute("DELETE FROM Guest WHERE GuestID = %s;", (guestId,))
+    conn.commit()
+
+    return jsonify({ "success": True })
+
 
 if __name__ == "__main__":
     app.run(debug=True)
