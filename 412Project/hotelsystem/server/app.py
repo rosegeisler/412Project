@@ -16,15 +16,18 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
+
 @app.route("/")
 def home():
     return "Flask server is running"
 
+
 @app.route("/APICALLNAME")
 def APICALLNAME():
-    #Do something with the database
-    #return the data
+    # Do something with the database
+    # return the data
     return "Flask server is running"
+
 
 @app.route("/CreateBooking/FindAvailableRooms")
 def FindAvailableRooms():
@@ -45,7 +48,8 @@ def FindAvailableRooms():
         )
     """
 
-    cur.execute(query, (bedCount, petFriendly, accessible, smokeFree, checkIn, checkOut))
+    cur.execute(query, (bedCount, petFriendly,
+                accessible, smokeFree, checkIn, checkOut))
     rows = cur.fetchall()
 
     return jsonify([
@@ -88,9 +92,10 @@ def CreateBooking():
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s); 
     """
 
-    cur.execute(query, (roomID, startDate, endDate, totalPrice, guestId, checkedIn, checkedOut, ready))
+    cur.execute(query, (roomID, startDate, endDate, totalPrice,
+                guestId, checkedIn, checkedOut, ready))
     conn.commit()
-    
+
 
 @app.route("/CreateNewGuest")
 def NewGuest():
@@ -98,7 +103,6 @@ def NewGuest():
     phoneNumber = request.args.get("phoneNumber", "").strip()
     age = request.args.get("age", "").strip()
     loyalty = request.args.get("loyalty", "").strip()
-
 
     query = """
         INSERT INTO Guest (GuestName, PhoneNumber, Age, LoyaltyMember)
@@ -109,7 +113,8 @@ def NewGuest():
     cur.execute(query, (guestName, phoneNumber, age, loyalty))
     conn.commit()
     guestId = cur.fetchone()[0]
-    return jsonify({ "GuestID": guestId })
+    return jsonify({"GuestID": guestId})
+
 
 @app.route("/NewBooking/SelectGuest", methods=["GET"])
 def NewBookingSelectGuest():
@@ -137,12 +142,14 @@ def NewBookingSelectGuest():
         for r in rows
     ])
 
+
 @app.route("/ManageBookings/Search", methods=["GET"])
 def ManageBookingsSearch():
     guestName = request.args.get("guestName", "").strip()
     roomNumber = request.args.get("roomNumber", "").strip()
     date = request.args.get("date", "").strip()
-    missingHousekeeper = request.args.get("missingHousekeeper", "").strip().lower() == "true"
+    missingHousekeeper = request.args.get(
+        "missingHousekeeper", "").strip().lower() == "true"
 
     where = []
     params = []
@@ -243,6 +250,7 @@ def ManageBookingsAssignHousekeeper():
     row = cur.fetchone()
     return jsonify({"ok": True, "HousekeeperName": row[0] if row else None})
 
+
 @app.route("/ManageBookings/Housekeepers", methods=["GET"])
 def ManageBookingsHousekeepers():
     query = """
@@ -267,6 +275,7 @@ def ManageBookingsHousekeepers():
         for r in rows
     ])
 
+
 @app.route("/ManageBookings/RemoveHousekeeper", methods=["POST"])
 def ManageBookingsRemoveHousekeeper():
     bookingID = request.args.get("bookingID", "").strip()
@@ -280,9 +289,109 @@ def ManageBookingsRemoveHousekeeper():
     conn.commit()
     return jsonify({"ok": True})
 
+
 if __name__ == "__main__":
     app.run(debug=True)
 
-conn.commit()
-cur.close()
-conn.close()
+
+@app.route("/CheckIn/Search", methods=["GET"])
+def CheckInSearch():
+    guestName = request.args.get("guestName", "").strip()
+
+    where = ["b.CheckedIn = FALSE"]
+    params = []
+
+    if guestName:
+        where.append("g.GuestName ILIKE %s")
+        params.append(f"%{guestName}%")
+
+    query = f"""
+        SELECT
+            b.BookingID,
+            g.GuestID,
+            g.GuestName,
+            g.PhoneNumber,
+            g.LoyaltyMember,
+            r.RoomID,
+            r.RoomNumber,
+            r.RoomType,
+            r.BedCount,
+            r.PetFriendly,
+            r.Accessible,
+            r.SmokeFree,
+            b.Ready,
+            b.Status
+        FROM Booking b
+        JOIN Guest g ON g.GuestID = b.GuestID
+        JOIN Room r ON r.RoomID = b.RoomID
+        WHERE {" AND ".join(where)}
+        ORDER BY g.GuestName ASC;
+    """
+
+    cur.execute(query, tuple(params))
+    rows = cur.fetchall()
+
+    return jsonify([
+        {
+            "BookingID": r[0],
+            "GuestID": r[1],
+            "GuestName": r[2],
+            "PhoneNumber": r[3],
+            "LoyaltyMember": r[4],
+            "RoomID": r[5],
+            "RoomNumber": r[6],
+            "RoomType": r[7],
+            "BedCount": r[8],
+            "PetFriendly": r[9],
+            "Accessible": r[10],
+            "SmokeFree": r[11],
+            "Ready": r[12],
+            "Status": r[13],
+        }
+        for r in rows
+    ])
+
+
+@app.route("/CheckIn/CheckInGuest", methods=["POST"])
+def CheckInGuest():
+    bookingID = request.args.get("bookingID", "").strip()
+
+    if not bookingID:
+        return jsonify({"error": "bookingID required"}), 400
+
+    cur.execute("""
+        UPDATE Booking
+        SET CheckedIn = TRUE,
+            Status = 'Paid'
+        WHERE BookingID = %s
+        RETURNING RoomID;
+    """, (bookingID,))
+
+    row = cur.fetchone()
+
+    if not row:
+        conn.rollback()
+        return jsonify({"error": "Booking not found"}), 404
+
+    roomID = row[0]
+
+    cur.execute("""
+        UPDATE Room
+        SET Ready = FALSE
+        WHERE RoomID = %s;
+    """, (roomID,))
+
+    conn.commit()
+
+    return jsonify({
+        "ok": True,
+        "BookingID": bookingID,
+        "RoomID": roomID,
+        "Status": "Paid",
+        "CheckedIn": True,
+        "RoomReady": False
+    })
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
