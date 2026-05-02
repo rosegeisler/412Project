@@ -21,13 +21,14 @@ export default function Home() {
       );
       const data = await res.json();
       const guestId = data.GuestID;
+      console.log(guestId)
       return guestId;
     } catch (err) {
       console.error("Search failed:", err);
     }
   };
 
-  const bookingDates = () => {
+  const bookingDates = async () =>{
     //Logic Checks
     if(guestName == "" || phoneNumber == "" || age == ""){
       //Error to user displayed that they are missing required inputs
@@ -53,7 +54,7 @@ export default function Home() {
       return
     } 
 
-    const id = createGuest()
+    const id = await createGuest()
 
     router.push(`/Pages/CreateBooking/BookingDates?GuestID=${id}`)
   };

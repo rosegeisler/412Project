@@ -23,6 +23,8 @@ function BookingDatesContent() {
             setError("Check-in must be before check-out");
             return;
         }
+        console.log("TEST")
+        console.log(guestID)
         router.push(`/Pages/CreateBooking/AvailableRooms?CheckIn=${checkInDate}&CheckOut=${checkOutDate}&GuestID=${guestID}`);
     };
 
