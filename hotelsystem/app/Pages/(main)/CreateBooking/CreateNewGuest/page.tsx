@@ -1,18 +1,20 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import Panel from "../../../../components/Panel";
-
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
-export default function Home() {
+function CreateGuest() {
   const router = useRouter();
   const [guestName, setGuestName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [age, setAge] = useState("");
   const [loyalty, setLoyalty] = useState("no");
   const [errorLabel, setError] = useState("");
+
+  const searchParams = useSearchParams();
+  const name = searchParams.get("name")
 
   const createGuest = async () => {
     try {
@@ -56,7 +58,7 @@ export default function Home() {
 
     const id = await createGuest()
 
-    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${id}`)
+    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${id}&name=${name}`)
   };
 
 return (
@@ -88,4 +90,12 @@ return (
     </div>
   </Panel>
 );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateGuest/>
+    </Suspense>
+  );
 }

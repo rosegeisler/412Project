@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Panel from "../../../../components/Panel";
+import { Suspense } from "react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
@@ -18,6 +19,7 @@ export default function AssignHousekeeperPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const bookingID = searchParams.get("bookingID");
+  const name = searchParams.get("name")
 
   const [housekeepers, setHousekeepers] = useState<Housekeeper[]>([]);
   const [loading, setLoading] = useState(true);
@@ -101,7 +103,7 @@ export default function AssignHousekeeperPage() {
           </h1>
           <button
             className="btn"
-            onClick={() => router.push("/Pages/ManageBookings")}
+            onClick={() => router.push(`/Pages/ManageBookings?name=${name}`)}
           >
             Cancel
           </button>

@@ -1,8 +1,9 @@
 "use client";
 import SearchButton from "../../../components/SearchButton";
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams  } from "next/navigation";
 import Panel from "../../../components/Panel";
+import { Suspense } from "react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
@@ -28,8 +29,7 @@ type SortKey =
   | "HousekeeperName";
 
 type SortDir = "asc" | "desc";
-
-export default function Home() {
+function ManageBookings() {
   const router = useRouter();
   const [guestNameFilter, setGuestNameFilter] = useState("");
   const [roomNumberFilter, setRoomNumberFilter] = useState("");
@@ -40,6 +40,9 @@ export default function Home() {
   const [sortKey, setSortKey] = useState<SortKey>("BookingID");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [errorLabel, setError] = useState("");
+
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name')
 
   const handleSearch = useCallback(async () => {
     try {
@@ -347,7 +350,7 @@ export default function Home() {
                         }
                         onClick={() =>
                           router.push(
-                            `/Pages/ManageBookings/AssignHousekeeper?bookingID=${b.BookingID}`
+                            `/Pages/ManageBookings/AssignHousekeeper?bookingID=${b.BookingID}&name=${name}`
                           )
                         }
                       >
@@ -362,5 +365,13 @@ export default function Home() {
             </div>
           {errorLabel && <h1 className="text-red-400 mt-2">{errorLabel}</h1>}
       </Panel>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ManageBookings/>
+    </Suspense>
   );
 }

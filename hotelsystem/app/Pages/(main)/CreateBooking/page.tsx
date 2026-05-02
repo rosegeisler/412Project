@@ -3,16 +3,19 @@ import SearchButton from "../../../components/SearchButton";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Panel from "../../../components/Panel";
-
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
-
-export default function Home() {
+ function CreateBookingContent() {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
   const [results, setResults] = useState<Guest[]>([]);
   const [selectedGuestId, setSelectedGuestId] = useState<number | null>(null);
   const [errorLabel, setError] = useState("");
+
+  const searchParams = useSearchParams();
+  const name = searchParams.get("name") || "";
   
 
   type Guest = {
@@ -23,7 +26,7 @@ export default function Home() {
   };
 
   const newGuest = () => {
-    router.push("/Pages/CreateBooking/CreateNewGuest");
+    router.push(`/Pages/CreateBooking/CreateNewGuest?name=${name}`);
   };
 
   const bookingDates = () => {
@@ -32,7 +35,7 @@ export default function Home() {
       return
     }
 
-    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${selectedGuestId}`)
+    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${selectedGuestId}&name=${name}`)
   };
 
   const handleSearch = async () => {
@@ -112,5 +115,13 @@ export default function Home() {
       </div>
       
     </Panel>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateBookingContent />
+    </Suspense>
   );
 }
