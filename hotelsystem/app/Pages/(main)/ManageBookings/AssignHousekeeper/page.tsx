@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Panel from "../../../../components/Panel";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
@@ -93,8 +94,7 @@ export default function AssignHousekeeperPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-start justify-center p-6">
-      <div className="w-full max-w-3xl space-y-4">
+    <Panel>
         <div className="flex items-center justify-between">
           <h1 className="text-white text-2xl font-semibold">
             Assign Housekeeper to Booking #{bookingID}
@@ -106,8 +106,6 @@ export default function AssignHousekeeperPage() {
             Cancel
           </button>
         </div>
-
-        <div className="bg-panel-dark p-4 rounded-lg">
           {loading && (
             <p className="text-gray-300 p-4 text-center">Loading housekeepers...</p>
           )}
@@ -120,7 +118,8 @@ export default function AssignHousekeeperPage() {
           )}
 
           {!loading && housekeepers.length > 0 && (
-            <table className="w-full text-left text-gray-200">
+          <div className="table-div-style" >
+            <table className="table-style">
               <thead>
               <tr className="text-white whitespace-nowrap">
                   <th className="p-2">
@@ -172,9 +171,8 @@ export default function AssignHousekeeperPage() {
                     ))}
               </tbody>
             </table>
+            </div>
           )}
-        </div>
-      </div>
-    </div>
+      </Panel>
   );
 }

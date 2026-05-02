@@ -2,6 +2,7 @@
 import SearchButton from "../../../components/SearchButton";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Panel from "../../../components/Panel";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
@@ -165,9 +166,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-start justify-center p-6">
-      <div className="w-full max-w-7xl space-y-4">
-        {/* filters bar */}
+    <Panel>
         <div className="flex flex-wrap items-center gap-3">
           <input
             className="textfield flex-1 min-w-[180px]"
@@ -198,11 +197,8 @@ export default function Home() {
           </label>
           <SearchButton onClick={handleSearch} />
         </div>
-
-        {/* results */}
-        <div className="bg-panel-dark p-4 rounded-lg">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-gray-200">
+        <div className="table-div-style">
+            <table className="table-style">
               <thead>
                 <tr className="text-white whitespace-nowrap">
                   <th className="p-2">
@@ -361,10 +357,8 @@ export default function Home() {
                 ))}
               </tbody>
             </table>
-          </div>
+            </div>
           {errorLabel && <h1 className="text-red-400 mt-2">{errorLabel}</h1>}
-        </div>
-      </div>
-    </div>
+      </Panel>
   );
 }

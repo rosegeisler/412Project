@@ -23,7 +23,7 @@
   }
   .table-div-style {
     @apply
-      max-h-80 overflow-y-auto mt-4 w-full
+      max-h-100 overflow-y-auto mt-4 w-full
   }
   .table-style {
     @apply 
