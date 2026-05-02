@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import psycopg2
 from datetime import datetime
+import psycopg2
+from flask_cors import CORS
+from flask import Flask, request, jsonify
+
 
 app = Flask(__name__)
 CORS(app)
@@ -308,24 +309,19 @@ def CheckInSearch():
     query = f"""
         SELECT
             b.BookingID,
-            g.GuestID,
             g.GuestName,
             g.PhoneNumber,
             g.LoyaltyMember,
-            r.RoomID,
             r.RoomNumber,
             r.RoomType,
             r.BedCount,
-            r.PetFriendly,
-            r.Accessible,
-            r.SmokeFree,
             b.Ready,
             b.Status
         FROM Booking b
         JOIN Guest g ON g.GuestID = b.GuestID
         JOIN Room r ON r.RoomID = b.RoomID
         WHERE {" AND ".join(where)}
-        ORDER BY g.GuestName ASC;
+        ORDER BY b.BookingID ASC;
     """
 
     cur.execute(query, tuple(params))
@@ -334,19 +330,14 @@ def CheckInSearch():
     return jsonify([
         {
             "BookingID": r[0],
-            "GuestID": r[1],
-            "GuestName": r[2],
-            "PhoneNumber": r[3],
-            "LoyaltyMember": r[4],
-            "RoomID": r[5],
-            "RoomNumber": r[6],
-            "RoomType": r[7],
-            "BedCount": r[8],
-            "PetFriendly": r[9],
-            "Accessible": r[10],
-            "SmokeFree": r[11],
-            "Ready": r[12],
-            "Status": r[13],
+            "GuestName": r[1],
+            "PhoneNumber": r[2],
+            "LoyaltyMember": r[3],
+            "RoomNumber": r[4],
+            "RoomType": r[5],
+            "BedCount": r[6],
+            "Ready": r[7],
+            "Status": r[8],
         }
         for r in rows
     ])
@@ -393,5 +384,12 @@ def CheckInGuest():
     })
 
 
+@app.route("/test")
+def test():
+    return "test works"
+
+
+print(app.url_map)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
