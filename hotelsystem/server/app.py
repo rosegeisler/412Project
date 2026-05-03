@@ -321,7 +321,8 @@ def ViewGuests():
             FROM Guest g
             LEFT JOIN Booking b ON g.GuestID = b.GuestID
             WHERE g.GuestName ILIKE %s
-            GROUP BY g.GuestID, g.GuestName, g.PhoneNumber, g.LoyaltyMember;
+            GROUP BY g.GuestID, g.GuestName, g.PhoneNumber, g.LoyaltyMember
+            ORDER BY NextBooking ASC;
         """
         cur.execute(query, (f"%{textEntry}%",))
     else:
@@ -337,7 +338,9 @@ def ViewGuests():
                 g.PhoneNumber
             FROM Guest g
             LEFT JOIN Booking b ON g.GuestID = b.GuestID
-            GROUP BY g.GuestID, g.GuestName, g.PhoneNumber, g.LoyaltyMember;
+            GROUP BY g.GuestID, g.GuestName, g.PhoneNumber, g.LoyaltyMember
+            ORDER BY NextBooking ASC;
+
         """
         cur.execute(query)
 
