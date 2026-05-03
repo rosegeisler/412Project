@@ -29,10 +29,18 @@ export default function AssignHousekeeperPage() {
   const [sortKey, setSortKey] = useState<SortKey>("CurrentAssignments");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
 
+  const checkIn = searchParams.get("checkIn");
+
+  const dayName = checkIn
+    ? new Date(checkIn + "T00:00:00").toLocaleDateString("en-US", { weekday: "long" })
+    : null;
+
   useEffect(() => {
     const loadHousekeepers = async () => {
       try {
-        const res = await fetch(`${API_BASE}/ManageBookings/Housekeepers`);
+        const res = await fetch(
+          `${API_BASE}/ManageBookings/AvailableHousekeepers?bookingID=${bookingID}`
+        );
         if (!res.ok) throw new Error("Failed to load");
         const data = await res.json();
         setHousekeepers(data);
@@ -43,8 +51,8 @@ export default function AssignHousekeeperPage() {
         setLoading(false);
       }
     };
-    loadHousekeepers();
-  }, []);
+    if (bookingID) loadHousekeepers();
+  }, [bookingID]);
 
   const toggleSort = (key: SortKey) => {
     if (sortKey === key) {
@@ -61,7 +69,6 @@ export default function AssignHousekeeperPage() {
       cmp = a.Name.localeCompare(b.Name);
     } else {
       cmp = (a[sortKey] as number) - (b[sortKey] as number);
-      // tie-breaker alphabetical by name
       if (cmp === 0) cmp = a.Name.localeCompare(b.Name);
     }
     return sortDir === "asc" ? cmp : -cmp;
@@ -96,85 +103,91 @@ export default function AssignHousekeeperPage() {
   }
 
   return (
-    <Panel>
-        <div className="flex items-center justify-between">
-          <h1 className="text-white text-2xl font-semibold">
-            Assign Housekeeper to Booking #{bookingID}
-          </h1>
-          <button
-            className="btn"
-            onClick={() => router.push(`/Pages/ManageBookings?name=${name}`)}
-          >
-            Cancel
-          </button>
-        </div>
+    <div className="min-h-screen flex items-start justify-center p-6">
+      <Panel>
+        <div className="w-full max-w-3xl space-y-4 p-6">
+          <div>
+            <h1 className="text-black text-2xl font-semibold">
+              Assign Housekeeper to Booking #{bookingID}
+            </h1>
+            {dayName && (
+              <p className="text-gray-400 text-sm mt-1">
+                Showing housekeepers available on {dayName}s (check-in: {checkIn})
+              </p>
+            )}
+          </div>
+  
           {loading && (
-            <p className="text-gray-300 p-4 text-center">Loading housekeepers...</p>
+            <p className="text-gray-300 p-4 text-center">
+              Loading housekeepers...
+            </p>
           )}
           {error && <p className="text-red-400 p-2">{error}</p>}
-
+  
           {!loading && housekeepers.length === 0 && !error && (
             <p className="text-gray-400 p-4 text-center">
               No housekeepers available.
             </p>
           )}
-
+  
           {!loading && housekeepers.length > 0 && (
-          <div className="table-div-style" >
-            <table className="table-style">
+            <div className="table-div-style">
+              <table className="table-style">
               <thead>
-              <tr className="text-white whitespace-nowrap">
-                  <th className="p-2">
-                    <button
-                      onClick={() => toggleSort("StaffID")}
-                      className="btn w-fit px-3 py-1"
-                    >
-                      Staff ID {arrow("StaffID")}
-                    </button>
-                  </th>
-                  <th className="p-2">
-                    <button
-                      onClick={() => toggleSort("Name")}
-                      className="btn w-fit px-3 py-1"
-                    >
-                      Name {arrow("Name")}
-                    </button>
-                  </th>
-                  <th className="p-2">
-                    <button
-                      onClick={() => toggleSort("CurrentAssignments")}
-                      className="btn w-fit px-3 py-1"
-                    >
-                      Current Load {arrow("CurrentAssignments")}
-                    </button>
-                  </th>
-                  <th className="p-2"></th>
-                </tr>
-              </thead>
-              <tbody>
-                  {sortedHousekeepers.map((h, i) => (
-                      <tr
-                        key={h.StaffID}
-                        className={i % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}
+                  <tr className="text-white whitespace-nowrap">
+                    <th className="p-2">
+                      <button
+                        onClick={() => toggleSort("StaffID")}
+                        className="btn w-fit px-3 py-1"
                       >
-                        <td className="p-2">{h.StaffID}</td>
-                        <td className="p-2">{h.Name}</td>
-                        <td className="p-2">{h.CurrentAssignments ?? 0}</td>
-                        <td className="p-2">
-                          <button
-                            className="bg-teal-500 hover:bg-teal-600 text-white rounded-full px-3 py-1 text-sm transition disabled:opacity-50"
-                            disabled={submitting !== null}
-                            onClick={() => handleAssign(h.StaffID)}
-                          >
-                            {submitting === h.StaffID ? "Assigning..." : "Select"}
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-              </tbody>
-            </table>
+                        Staff ID {arrow("StaffID")}
+                      </button>
+                    </th>
+                    <th className="p-2">
+                      <button
+                        onClick={() => toggleSort("Name")}
+                        className="btn w-fit px-3 py-1"
+                      >
+                        Name {arrow("Name")}
+                      </button>
+                    </th>
+                    <th className="p-2">
+                      <button
+                        onClick={() => toggleSort("CurrentAssignments")}
+                        className="btn w-fit px-3 py-1"
+                      >
+                        Current Load {arrow("CurrentAssignments")}
+                      </button>
+                    </th>
+                    <th className="p-2"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedHousekeepers.map((h, i) => (
+                    <tr
+                      key={h.StaffID}
+                      className={i % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}
+                    >
+                      <td className="p-2">{h.StaffID}</td>
+                      <td className="p-2">{h.Name}</td>
+                      <td className="p-2">{h.CurrentAssignments ?? 0}</td>
+                      <td className="p-2">
+                        <button
+                          className="bg-teal-500 hover:bg-teal-600 text-white rounded-full px-3 py-1 text-sm transition disabled:opacity-50"
+                          disabled={submitting !== null}
+                          onClick={() => handleAssign(h.StaffID)}
+                        >
+                          {submitting === h.StaffID ? "Assigning..." : "Select"}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
+        </div>
       </Panel>
+    </div>
   );
 }
