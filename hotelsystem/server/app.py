@@ -411,7 +411,7 @@ def DeleteGuest():
 def CheckInSearch():
     guestName = request.args.get("guestName", "").strip()
 
-    where = []
+    where = ["b.CheckedIn = FALSE"]
     params = []
 
     if guestName:

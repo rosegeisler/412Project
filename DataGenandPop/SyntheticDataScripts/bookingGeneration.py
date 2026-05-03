@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 
 conn = psycopg2.connect(
     dbname="myhotel",
-    user="uruser",
-    password="ur pw",
+    user="",
+    password="",
     host="localhost",
     port="5432"
 )
