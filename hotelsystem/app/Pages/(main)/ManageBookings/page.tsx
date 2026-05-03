@@ -237,6 +237,7 @@ function ManageBookings() {
                     >
                       Check In {arrow("StartDate")}
                     </button>
+
                   </th>
                   <th className="p-2">
                     <button
@@ -315,7 +316,7 @@ function ManageBookings() {
                           className="bg-green-600 hover:bg-green-700 text-white rounded-full px-3 py-1 text-sm transition"
                           onClick={() => markPaid(b.BookingID)}
                         >
-                          Pay
+                          Confirm payment
                         </button>
                       ) : (
                         <span>{b.Status}</span>
@@ -325,7 +326,7 @@ function ManageBookings() {
                     {/* housekeeper column */}
                     <td className="p-2">
                       {b.HousekeeperName ? (
-                        <span className="inline-flex items-center gap-8 bg-gray-700 rounded-full px-3 py-1 text-sm">
+                        <span className="inline-flex items-center gap-4 bg-gray-700 rounded-full px-3 py-1 text-sm">
                           {b.HousekeeperName}
                           <button
                             onClick={() => removeHousekeeper(b.BookingID)}
@@ -342,20 +343,20 @@ function ManageBookings() {
                     </td>
 
                     <td className="p-2">
-                      <button
-                        className={
-                          b.HousekeeperName
-                            ? "bg-teal-500 hover:bg-teal-600 text-white rounded-full px-3 py-1 text-sm transition"
-                            : "bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-1 text-sm transition"
-                        }
-                        onClick={() =>
-                          router.push(
-                            `/Pages/ManageBookings/AssignHousekeeper?bookingID=${b.BookingID}&name=${name}`
-                          )
-                        }
-                      >
-                        {b.HousekeeperName ? "Reassign" : "Add"}
-                      </button>
+                    <button
+                      className={
+                        b.HousekeeperName
+                          ? "bg-teal-500 hover:bg-teal-600 text-white rounded-full px-3 py-1 text-sm transition"
+                          : "bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-1 text-sm transition"
+                      }
+                      onClick={() =>
+                        router.push(
+                          `/Pages/ManageBookings/AssignHousekeeper?bookingID=${b.BookingID}&checkIn=${b.StartDate}`
+                        )
+                      }
+                    >
+                      {b.HousekeeperName ? "Reassign" : "Add"}
+                    </button>
                     </td>
 
                   </tr>

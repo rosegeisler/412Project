@@ -287,6 +287,41 @@ def ManageBookingsHousekeepers():
         for r in rows
     ])
 
+@app.route("/ManageBookings/AvailableHousekeepers", methods=["GET"])
+def ManageBookingsAvailableHousekeepers():
+    bookingID = request.args.get("bookingID", "").strip()
+    if not bookingID:
+        return jsonify({"error": "bookingID required"}), 400
+
+    query = """
+        SELECT
+            s.StaffID,
+            s.Name,
+            COUNT(b2.BookingID) FILTER (WHERE b2.Ready = FALSE) AS CurrentAssignments
+        FROM Booking b
+        JOIN Housekeeper h ON
+            CASE EXTRACT(DOW FROM b.StartDate)::INT
+                WHEN 0 THEN h.SunAvail
+                WHEN 1 THEN h.MonAvail
+                WHEN 2 THEN h.TuesAvail
+                WHEN 3 THEN h.WedAvail
+                WHEN 4 THEN h.ThursdAvail
+                WHEN 5 THEN h.FriAvail
+                WHEN 6 THEN h.SatAvail
+            END = TRUE
+        JOIN Staff s ON s.StaffID = h.StaffID
+        LEFT JOIN Booking b2 ON b2.Housekeeper = s.StaffID
+        WHERE b.BookingID = %s
+        GROUP BY s.StaffID, s.Name
+        ORDER BY s.Name;
+    """
+    cur.execute(query, (bookingID,))
+    rows = cur.fetchall()
+    return jsonify([
+        {"StaffID": r[0], "Name": r[1], "CurrentAssignments": r[2]}
+        for r in rows
+    ])
+
 @app.route("/ManageBookings/RemoveHousekeeper", methods=["POST"])
 def ManageBookingsRemoveHousekeeper():
     bookingID = request.args.get("bookingID", "").strip()
