@@ -411,7 +411,7 @@ def DeleteGuest():
 def CheckInSearch():
     guestName = request.args.get("guestName", "").strip()
 
-    where = ["b.CheckedIn = FALSE"]
+    where = []
     params = []
 
     if guestName:
@@ -432,7 +432,7 @@ def CheckInSearch():
         FROM Booking b
         JOIN Guest g ON g.GuestID = b.GuestID
         JOIN Room r ON r.RoomID = b.RoomID
-        WHERE {" AND ".join(where)}
+         {"WHERE " + " AND ".join(where) if where else ""}
         ORDER BY b.BookingID ASC;
     """
 
