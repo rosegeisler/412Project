@@ -42,7 +42,8 @@ function ManageBookings() {
   const [errorLabel, setError] = useState("");
 
   const searchParams = useSearchParams();
-  const name = searchParams.get('name')
+  const name = searchParams.get('name');
+  const building = searchParams.get("building");
 
   const handleSearch = useCallback(async () => {
     try {
@@ -351,7 +352,7 @@ function ManageBookings() {
                       }
                       onClick={() =>
                         router.push(
-                          `/Pages/ManageBookings/AssignHousekeeper?bookingID=${b.BookingID}&checkIn=${b.StartDate}`
+                          `/Pages/ManageBookings/AssignHousekeeper?bookingID=${b.BookingID}&checkIn=${b.StartDate}&name=${name}&building=${building}`
                         )
                       }
                     >

@@ -15,11 +15,12 @@ type Housekeeper = {
 type SortKey = "StaffID" | "Name" | "CurrentAssignments";
 type SortDir = "asc" | "desc";
 
-export default function AssignHousekeeperPage() {
+function AssignHousekeeperPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const bookingID = searchParams.get("bookingID");
-  const name = searchParams.get("name")
+  const name = searchParams.get("name");
+  const building = searchParams.get("building");
 
   const [housekeepers, setHousekeepers] = useState<Housekeeper[]>([]);
   const [loading, setLoading] = useState(true);
@@ -86,7 +87,7 @@ export default function AssignHousekeeperPage() {
         { method: "POST" }
       );
       if (!res.ok) throw new Error("Failed");
-      router.push("/Pages/ManageBookings");
+      router.push(`/Pages/ManageBookings?name=${name}&building=${building}`);
     } catch (err) {
       console.error(err);
       setError("Failed to assign housekeeper");
@@ -189,5 +190,14 @@ export default function AssignHousekeeperPage() {
         </div>
       </Panel>
     </div>
+  );
+}
+
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AssignHousekeeperPage/>
+    </Suspense>
   );
 }

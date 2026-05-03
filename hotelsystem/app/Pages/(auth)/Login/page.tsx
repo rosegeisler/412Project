@@ -18,14 +18,11 @@ export default function Home() {
         `${API_BASE}/Login?username=${userName}&password=${password}`
       );
       const data = await res.json();
-
       if (!res.ok) {
         setError("Invalid username or password");
         return;
       }
-
-      router.push(`/Pages/CreateBooking?name=${data.name}`);
-
+      router.push(`/Pages/CreateBooking?name=${data.name}&building=${data.building}`);
     } catch (err) {
       console.error("Login failed:", err);
       setError("Something went wrong");
@@ -35,7 +32,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-panel-dark  text-white shadow-md w-full max-w-sm space-y-4 text-center p-8">
-        <h1  className="panel-large-text" >Company Name Login</h1>
+        <h1  className="panel-large-text" >SHRK Systems Login</h1>
         <input className="textfield" placeholder="Username" value={userName} onChange={(e) => setUserName(e.target.value)} />
         <input className="textfield" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
           onKeyDown={(e) => e.key === "Enter" && handleLogin()} />

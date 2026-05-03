@@ -15,6 +15,7 @@ function CreateGuest() {
 
   const searchParams = useSearchParams();
   const name = searchParams.get("name")
+  const building = searchParams.get("building")
 
   const createGuest = async () => {
     try {
@@ -58,7 +59,7 @@ function CreateGuest() {
 
     const id = await createGuest()
 
-    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${id}&name=${name}`)
+    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${id}&name=${name}&building=${building}`)
   };
 
 return (

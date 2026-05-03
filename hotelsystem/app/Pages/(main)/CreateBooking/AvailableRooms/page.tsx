@@ -8,10 +8,11 @@ import Panel from "../../../../components/Panel";
 function AvailableRoomsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const checkIn = searchParams.get('CheckIn')
-  const checkOut = searchParams.get('CheckOut')
-  const guestID = searchParams.get('GuestID')
-  const name = searchParams.get('name')
+  const checkIn = searchParams.get('CheckIn');
+  const checkOut = searchParams.get('CheckOut');
+  const guestID = searchParams.get('GuestID');
+  const name = searchParams.get('name');
+  const building = searchParams.get('building')
 
   const [bedCount, setBedCount] = useState("1");
   const [petFriendly, setPetFriendly] = useState(false);
@@ -46,7 +47,7 @@ function AvailableRoomsContent() {
 
   const finishBooking = () => {
       createBooking()
-      router.push(`/Pages/CreateBooking/BookingConfirmation?name=${name}`);
+      router.push(`/Pages/CreateBooking/BookingConfirmation?name=${name}&building=${building}`);
   };
 
   const displayAvailableRooms = async (): Promise<void> =>{

@@ -7,8 +7,9 @@ import { useSearchParams } from 'next/navigation'
 function BookingDatesContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const guestID = searchParams.get('GuestID')
-    const name = searchParams.get('name')
+    const guestID = searchParams.get('GuestID');
+    const name = searchParams.get('name');
+    const building= searchParams.get('building');
 
     const [checkInDate, setCheckIn] = useState("");
     const [checkOutDate, setCheckOut] = useState("");
@@ -26,7 +27,7 @@ function BookingDatesContent() {
         }
         console.log("TEST")
         console.log(guestID)
-        router.push(`/Pages/CreateBooking/AvailableRooms?CheckIn=${checkInDate}&CheckOut=${checkOutDate}&GuestID=${guestID}&name=${name}`);
+        router.push(`/Pages/CreateBooking/AvailableRooms?CheckIn=${checkInDate}&CheckOut=${checkOutDate}&GuestID=${guestID}&name=${name}&building=${building}`);
     };
 
     const getTomorrow = () => {

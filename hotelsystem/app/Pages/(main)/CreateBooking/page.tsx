@@ -16,8 +16,8 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
   const searchParams = useSearchParams();
   const name = searchParams.get("name") || "";
+  const building = searchParams.get("building") || "";
   
-
   type Guest = {
     GuestID: number;
     GuestName: string;
@@ -26,7 +26,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
   };
 
   const newGuest = () => {
-    router.push(`/Pages/CreateBooking/CreateNewGuest?name=${name}`);
+    router.push(`/Pages/CreateBooking/CreateNewGuest?name=${name}&building=${building}`);
   };
 
   const bookingDates = () => {
@@ -35,7 +35,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
       return
     }
 
-    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${selectedGuestId}&name=${name}`)
+    router.push(`/Pages/CreateBooking/BookingDates?GuestID=${selectedGuestId}&name=${name}&building=${building}`)
   };
 
   const handleSearch = async () => {
