@@ -4,8 +4,8 @@ set -e
 #Configuration variables MOLDIFY for your own
 DB_HOST="${DB_HOST:-localhost}"
 DB_PORT="${DB_PORT:-5432}"
-DB_USER="${DB_USER:-ur username}"
-DB_PASSWORD="${DB_PASSWORD:- us pw}"
+DB_USER="${DB_USER:- YOUR username}"
+DB_PASSWORD="${DB_PASSWORD:- YOUR password}"
 PGPASSWORD="$DB_PASSWORD"
 export PGPASSWORD
 

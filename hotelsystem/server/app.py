@@ -372,6 +372,85 @@ def DeleteGuest():
     return jsonify({ "success": True })
 
 
+@app.route("/CheckIn/Search", methods=["GET"])
+def CheckInSearch():
+    guestName = request.args.get("guestName", "").strip()
+
+    where = ["b.CheckedIn = FALSE"]
+    params = []
+
+    if guestName:
+        where.append("g.GuestName ILIKE %s")
+        params.append(f"%{guestName}%")
+
+    query = f"""
+        SELECT
+            b.BookingID,
+            g.GuestName,
+            g.PhoneNumber,
+            g.LoyaltyMember,
+            r.RoomNumber,
+            r.RoomType,
+            r.BedCount,
+            b.Ready,
+            b.Status
+        FROM Booking b
+        JOIN Guest g ON g.GuestID = b.GuestID
+        JOIN Room r ON r.RoomID = b.RoomID
+        WHERE {" AND ".join(where)}
+        ORDER BY b.BookingID ASC;
+    """
+
+    cur.execute(query, tuple(params))
+    rows = cur.fetchall()
+
+    return jsonify([
+        {
+            "BookingID": r[0],
+            "GuestName": r[1],
+            "PhoneNumber": r[2],
+            "LoyaltyMember": r[3],
+            "RoomNumber": r[4],
+            "RoomType": r[5],
+            "BedCount": r[6],
+            "Ready": r[7],
+            "Status": r[8],
+        }
+        for r in rows
+    ])
+
+
+@app.route("/CheckIn/CheckInGuest")
+def CheckInGuest():
+    bookingID = request.args.get("bookingID", "").strip()
+
+    if not bookingID:
+        return jsonify({"error": "bookingID required"}), 400
+
+    cur.execute("""
+        UPDATE Booking
+        SET CheckedIn = TRUE,
+            Status = 'Paid'
+        WHERE BookingID = %s
+        RETURNING RoomID;
+    """, (bookingID,))
+
+    row = cur.fetchone()
+
+    if not row:
+        conn.rollback()
+        return jsonify({"error": "Booking not found"}), 404
+
+    conn.commit()
+
+    return jsonify({
+        "ok": True
+    })
+
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
